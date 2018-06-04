@@ -1,0 +1,20 @@
+<head>
+  <title>melos#if($title)-${title}#end</title>
+  <script type="text/javascript" src="$imageServer.get('script/bigpipe.js')"></script>
+  #if($iDemand.haveJs('jquery'))
+  <script type="text/javascript" src="$imageServer.get('script/jquery-1.4.2.min.js')"></script>
+  #end
+   #if($iDemand.haveJs('rsa'))
+	#**
+  <script language="JavaScript" type="text/javascript" src="$imageServer.get('script/rsa/jsbn.js')"></script>
+  <script language="JavaScript" type="text/javascript" src="$imageServer.get('script/rsa/prng4.js')"></script>
+  <script language="JavaScript" type="text/javascript" src="$imageServer.get('script/rsa/rng.js')"></script>
+  <script language="JavaScript" type="text/javascript" src="$imageServer.get('script/rsa/rsa.js')"></script>
+  <script language="JavaScript" type="text/javascript" src="$imageServer.get('script/rsa/base64.js')"></script>
+  **#
+  ##这个是上面5个js的合并版本
+  ##<script language="JavaScript" type="text/javascript" src="$imageServer.get('script/rsa/rsa-all.js')"></script>
+  ##这个是合并版本的压缩版
+  <script language="JavaScript" type="text/javascript" src="$imageServer.get('script/rsa/rsa-all-min.js')"></script>
+  #end
+</head>

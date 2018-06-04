@@ -1,0 +1,2 @@
+hello， $!{name}！this is a letter from Velocity Layout/Screen
+<br/>访问本应用:$!{appServer.get('/index.htm')}

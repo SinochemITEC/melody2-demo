@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<bean id="ResourceConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>WEB-INF/conf/server.properties</value>
+			</list>
+		</property>
+		<property name='properties'>
+			<props>
+				<prop key="session.max.inacterval">-1</prop>
+				<prop key="session.meta.cookie.name">_h_</prop>
+				<prop key="session.meta.cookie.locale.name">_l_</prop>
+				<prop key="session.meta.cookie.domain">${app.server.host}</prop>
+				<prop key="cookies.max.length">4095</prop>
+				<prop key="cookies.max.count">1</prop>
+				<prop key="web.encoding">UTF-8</prop>
+				<prop key="app.server.protocol">http</prop>
+				<prop key="image.server.host">${app.server.host}</prop>
+				<prop key="image.server.port">${app.server.port}</prop>
+				<prop key="image.server.protocol">${app.server.protocol}</prop>
+				<prop key="upload.server.host">${app.server.host}</prop>
+				<prop key="upload.server.port">${app.server.port}</prop>
+				<prop key="upload.server.protocol">${app.server.protocol}</prop>
+				<prop key="upload.server.path"></prop>
+				<prop key="httpclient.max.total">200</prop>
+				<prop key="httpclient.max.per.route">50</prop>
+				<prop key="httpclient.socket.timeout">3000</prop>
+				<prop key="httpclient.connection.timeout">3000</prop>
+				<prop key="httpclient.connection.request.timeout">5000</prop>
+				<prop key="support.locales">zh_CN,en_US</prop>
+				<prop key="default.locales">zh_CN</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="connectionManager" class="com.eyeieye.melos.util.httpclient.ConnectionManager">
+		<property name="encoding" value="${web.encoding}"></property>
+		<property name="maxTotal" value="${httpclient.max.total}" />
+		<property name="maxPerRoute" value="${httpclient.max.per.route}" />
+		<property name="socketTimeOut" value="${httpclient.socket.timeout}" />
+		<property name="connectionTimeOut" value="${httpclient.connection.timeout}" />
+		<property name="connectionRequestTimeOut" value="${httpclient.connection.request.timeout}" />
+	</bean>
+
+	<!-- URLBrokers -->
+	<bean id="appServerBroker" class="com.eyeieye.melos.web.url.RestUrlBroker">
+		<property name="encoding" value="${web.encoding}"></property>
+		<property name="config">
+			<bean class="com.eyeieye.melos.web.url.URLConfig">
+				<property name="host" value="${app.server.host}"></property>
+				<property name="port" value="${app.server.port}"></property>
+				<property name="followContextPath" value="true"></property>
+			</bean>
+		</property>
+		<property name="urlTemplates">
+			<map>
+				<entry key="movieUrl" value="/annotation/movie/{movieName}/{shipId}.htm"></entry>
+			</map>
+		</property>
+	</bean>
+	<!-- https的appserver -->
+	<bean id="sslAppServerBroker" class="com.eyeieye.melos.web.url.URLBroker">
+		<property name="encoding" value="${web.encoding}"></property>
+		<property name="config">
+			<bean class="com.eyeieye.melos.web.url.URLConfig">
+				<property name="protocol" value="https"></property>
+				<property name="host" value="${app.server.host}"></property>
+				<property name="port" value="${app.server.port}"></property>
+				<property name="followContextPath" value="true"></property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="imageServerBroker" class="com.eyeieye.melos.web.url.StampURLBroker">
+		<property name="encoding" value="${web.encoding}"></property>
+		<property name="config">
+			<bean class="com.eyeieye.melos.web.url.URLConfig">
+				<property name="host" value="${image.server.host}"></property>
+				<property name="port" value="${image.server.port}"></property>
+				<property name="followContextPath" value="true"></property>
+			</bean>
+		</property>
+		<property name="stamp" value="${web.stamp}"></property>
+	</bean>
+	<!-- 多主机url 配置 -->
+	<bean id="uploadServerBroker" class="com.eyeieye.melos.web.url.MultiHostURLBroker">
+		<property name="encoding" value="${web.encoding}"></property>
+		<property name="config">
+			<bean class="com.eyeieye.melos.web.url.MultiHostURLConfig">
+				<property name="hostsValues" value="s1.upload,s2.upload,s3.upload"></property>
+				<property name="port" value="80"></property>
+				<property name="followContextPath" value="false"></property>
+			</bean>
+		</property>
+	</bean>
+	<bean class="com.eyeieye.melos.web.url.ServletContextInitHelper" />
+
+	<bean id="localeFilterBean" class="com.eyeieye.melos.web.locale.LocaleFilter">
+		<property name="metaDomain" value="${session.meta.cookie.domain}"/>
+		<property name="localeCookieName" value="${session.meta.cookie.locale.name}" />
+		<property name="supportLocales" value="${support.locales}"/>
+		<property name="defaultLocale" value="${default.locales}"/>
+	</bean>
+
+
+	<bean id="encodingFilterBean" class="org.springframework.web.filter.CharacterEncodingFilter">
+		<property name="encoding" value="${web.encoding}"></property>
+		<property name="forceEncoding" value="false"></property>
+	</bean>
+
+	<bean id="responseOutputBufferFilterBean" class="com.eyeieye.melos.web.filter.ResponseOutputBufferFilter">
+		<property name="outCharset" value="${web.encoding}"></property>
+		<property name="etagEnable" value="false"></property>
+	</bean>
+
+	<bean id="performanceMonitorFilterBean"
+		class="com.eyeieye.melos.profiler.SpringPerformanceMonitorFilter">
+		<property name="threshold" value="${performance.monitor.threshold}"></property>
+	</bean>
+
+	<bean id="noSessionFilter" class="com.eyeieye.melos.web.nosession.NoSessionFilter">
+		<property name="metaCookieName" value="${session.meta.cookie.name}" />
+		<property name="maxInactiveInterval" value="${session.max.inacterval}" />
+		<property name="metaDomain" value="${session.meta.cookie.domain}" />
+		<property name="maxCount" value="${cookies.max.count}" />
+		<property name="maxLength" value="${cookies.max.length}" />
+	</bean>
+
+	<bean id="sessionMetaDataEncode" class="com.eyeieye.melos.web.nosession.SessionMetaDataEncode">
+		<property name="encoding" value="${web.encoding}"></property>
+		<property name="crypto" ref="aesCrypto" />
+	</bean>
+
+	<bean id="containFilterBean" class="com.eyeieye.melos.web.contain.ContainFilter">
+		<property name="connectionManager" ref="connectionManager" />
+		<property name="asyncContainExecutor">
+			<bean
+				class="com.eyeieye.melos.web.contain.async.execute.AsynchronContainExecuteFactory">
+				<property name="threadNamePrefix" value="asyncContain"></property>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="uuidGenerator" class="com.eyeieye.melos.util.uuid.UUIDPoolGenerator" />
+
+	<bean id="simpleOncePerRequestFilterChainBean"
+		class="com.eyeieye.melos.web.filter.SimpleOncePerRequestFilterChain">
+		<property name="filters">
+			<list>
+				<ref local="encodingFilterBean" />
+				<ref local="performanceMonitorFilterBean" />
+				<ref local="responseOutputBufferFilterBean" />
+				<ref local="noSessionFilter" />
+				<ref local="containFilterBean" />
+				<ref local="localeFilterBean"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="objectFactory" class="com.eyeieye.melos.util.ObjectFactoryImpl" />
+
+	<bean id="rsaCrypto" class="com.eyeieye.melos.util.crypto.impl.BcprovRsaCryptoImpl">
+		<property name="rsaKeyFile" value="WEB-INF/conf/rsa.key"></property>
+	</bean>
+
+	<bean id="aesCrypto" class="com.eyeieye.melos.util.crypto.impl.AESCryptoImpl" />
+
+	<bean id="blowfishCrypto" class="com.eyeieye.melos.util.crypto.impl.BlowfishCryptoImpl" />
+</beans>

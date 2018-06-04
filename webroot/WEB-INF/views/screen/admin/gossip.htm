@@ -1,0 +1,199 @@
+#set($layout='')
+<!DOCTYPE html>
+<html>
+<head>
+    <title>admin gossip demo</title>
+    <link rel="stylesheet" type="text/css" href="$imageServer.get('script/chat.css')">
+    <script src="$imageServer.get('script/jquery-1.12.4.min.js')"></script>
+    <script src="$imageServer.get('script/sockjs-1.1.0.min.js')"></script>
+    <script src="$imageServer.get('script/stomp.min.js')"></script>
+    <script src="$imageServer.get('script/push.min.js')"></script>
+    <script type="text/javascript">
+    	if(typeof JSON == 'undefined'){
+        	$('head').append($("<script type='text/javascript' src='$imageServer.get('script/json2.min.js')'>"));
+       	}
+       	var supportNotification = false;
+       (function($) {
+		    $(document).ready(function() {
+		        var chat = new Chat('${admin.loginId}');
+		        // Setup UI
+		        $('#sendButton').click(chat.send);
+		        $('#phrase').prop('autocomplete', 'off');
+		        $('#phrase').keyup(function(e) {
+		            if (e.keyCode == 13) {
+		                chat.send();
+		            }
+		        });
+		        if(Push.isSupported){
+		        	Push.Permission.request(function(){
+		        		supportNotification = true;
+		        	}, function(){
+		        		$('#notifyError').append('user not grant Notification permission.');
+		        	});
+		        }else{
+		        	$('#notifyError').append('browse not support Notification.');
+		        }
+		        chat.join();
+		    });
+		
+		    function Chat(username) {
+		        var _self = this;
+		        var _connected = false;
+		        var _username = username;
+		        var _disconnecting;
+		        var stompClient ; 
+		
+		        this.join = function() {
+		            _disconnecting = false;
+		            var socket = new SockJS('/api/chat');
+			    	stompClient = Stomp.over(socket);
+			    	stompClient.heartbeat.outgoing = 20000; //client will send heartbeats every 20000ms
+			    	stompClient.connect({uname:_username},connectedCallback,errorCallback);
+		        };
+		        
+		        function connectedCallback(frame){
+		            $('#phrase').focus();
+			    	console.log('Connected: ' + frame);
+			    	//订阅消息
+			    	_subscribe();
+			    	//发送上线消息
+			    	stompClient.send("/app/membership", {$!{headers}}, JSON.stringify({
+		            				user: _username,
+		                    		membership: 'join'
+		            			}));
+		            //显示连接建立消息
+		             _self.receive({
+	                    user: 'system',
+	                    chat: 'Connection to Server Opened'
+		            });
+				}
+				
+				//连接中的所有异常
+				function errorCallback(error){
+					if(error.indexOf('Lost connection to') >= 0){
+						//连接断开
+						_self._connectionClosed();
+					}
+				}
+		
+		        this.send = function() {
+		            var phrase = $('#phrase');
+		            var text = phrase.val();
+		            phrase.val('');
+		            
+		            if (!text || !text.length) return;
+		
+		            var colons = text.indexOf('::');
+		            if (colons > 0) {
+		            	//私聊
+		            	stompClient.send("/app/privatechat", {$!{headers}}, JSON.stringify({
+		            				user: _username,
+		                    		chat: text.substring(colons + 2),
+		                   			peer: text.substring(0, colons)
+		            			})); 
+		            } else {
+		            	//公聊
+		            	stompClient.send("/app/publicchat", {$!{headers}}, JSON.stringify({
+		            				user: _username,
+		                    		chat: text
+		            			})); 
+		            }
+		        };
+		
+		        this.receive = function(message) {
+		            var fromUser = message.user + ':';
+		            var text = message.chat;
+
+		            var chat = $('#chat');
+		            if (message.peer) {
+		                chat.append('<span class=\"private\"><span class=\"from\">' + fromUser + '&nbsp;</span><span class=\"text\">[private]&nbsp;' + text + '</span></span><br/>');
+		            } else {
+		                chat.append('<span class=\"from\">' + fromUser + '&nbsp;</span><span class=\"text\">' + text + '</span><br/>');
+		            }
+		
+		            // There seems to be no easy way in jQuery to handle the scrollTop property
+		            chat[0].scrollTop = chat[0].scrollHeight - chat.outerHeight();
+		            notifyMessage(message); 
+		        };
+		        
+		        function notifyMessage(message){
+		        	if(message.user == _username){
+		        		return;
+		        	}
+		        	if(supportNotification){
+		        		if(message.peer){
+		        			Push.create('private message from '+message.user, {
+							    body: message.chat,
+							   	tag:'chatPrivateNotification',
+							    timeout: 5000
+							});
+		        		}
+		        		else{
+		        			Push.create('message from '+message.user, {
+							    body: message.chat,
+							   	tag:'chatPrivateNotification',
+							    timeout: 2000
+							});
+		        		}
+		        	}
+		        } 
+		
+		        /**
+		         * Updates the members list.
+		         * This function is called when a message arrives on channel /chat/members
+		         */
+		        this.members = function(mb) {
+		            var list = '';
+		            $.each(mb, function() {
+		                list += this + '<br />';
+		            });
+		            $('#members').html(list);
+		        };
+		
+		        function _subscribe() {
+		        	//订阅公开消息
+		        	stompClient.subscribe('/topic/greetings', function (greeting) {
+			            _self.receive(JSON.parse(greeting.body));
+			        });
+			        //订阅私聊消息,此demo使用明文公开订阅，实际使用中需要对这个入口地址进行加密或者hash处理
+			        stompClient.subscribe('/queue/'+_username, function (greeting) {
+			            _self.receive(JSON.parse(greeting.body));
+			        });
+			        //订阅聊天会员
+		          	stompClient.subscribe('/topic/members', function (greeting) {
+			            _self.members(JSON.parse(greeting.body));
+			        });
+		        }
+		
+		        function _connectionClosed() {
+		            _self.receive({
+	                    user: 'system',
+	                    chat: 'Connection to Server Closed'
+		            });
+		            $('#members').empty();
+		            _username = null;
+		            _lastUser = null;
+		            _disconnecting = true;
+		        }
+		    }
+		})(jQuery);
+    </script>
+</head>
+<body>
+<h1>Chat Example</h1>
+<div id="chatroom">
+    <div id="chat"></div>
+    <div id="members"></div>
+    <div id="input">
+        <div id="joined">
+            Chat:
+            &nbsp;
+            <input id="phrase" type="text" />
+            <button id="sendButton" class="button">Send</button>
+        </div>
+    </div>
+</div>
+<br />
+<div style="padding: 0.25em;">Tip: Use {username}::text to send private messages</div><div id="notifyError"></div>
+</body>
+</html>
