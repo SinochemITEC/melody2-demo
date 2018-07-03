@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 .idea/*
 *.iml
 class/*
 target/*
 
+=======
+
+webroot/WEB-INF/classes/com/eyeieye/melody/demo/access/AdminAuthorityHandlerInterceptor.class
+*.class
+*.class
+>>>>>>> 8fca14c79e932dc08db062ba10a293dbd0c7dc84
+*.class
