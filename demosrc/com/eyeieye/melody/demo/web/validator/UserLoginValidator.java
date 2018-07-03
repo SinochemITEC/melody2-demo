@@ -20,10 +20,10 @@ public class UserLoginValidator implements Validator {
 	public void validate(Object obj, Errors err) {
 		User user = (User) obj;
 		if (StringUtils.isBlank(user.getRealName())) {
-			err.rejectValue("realName", null, null, "ÇëÊäÈëĞÕÃû");
+			err.rejectValue("realName", null, null, "è¯·è¾“å…¥å§“å");
 		}
 		if (StringUtils.isBlank(user.getPassword())) {
-			err.rejectValue("password", null, null, "ÇëÊäÈë¿ÚÁî");
+			err.rejectValue("password", null, null, "è¯·è¾“å…¥å£ä»¤");
 		}
 	}
 

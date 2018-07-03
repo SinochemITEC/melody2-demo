@@ -22,7 +22,7 @@ import com.eyeieye.melody.demo.enums.FunctionsEnum;
 import com.eyeieye.melody.demo.web.validator.AdministerLoginvalidator;
 
 /**
- * ÏµÍ³¹ÜÀíÔ±µÇÂ¼ÍË³öaction
+ * ç³»ç»Ÿç®¡ç†å‘˜ç™»å½•é€€å‡ºaction
  * 
  * @author fish
  * 
@@ -32,7 +32,7 @@ import com.eyeieye.melody.demo.web.validator.AdministerLoginvalidator;
 public class AdministerAction {
 
 	/**
-	 * ÑİÊ¾Èç¹ûÖ±½ÓÔÚactionÖĞ×¢ÈëÅäÖÃÎÄ¼şÖĞÉèÖÃµÄÖµ
+	 * æ¼”ç¤ºå¦‚æœç›´æ¥åœ¨actionä¸­æ³¨å…¥é…ç½®æ–‡ä»¶ä¸­è®¾ç½®çš„å€¼
 	 */
 	private @Value("${system.devMode}") boolean devMode;
 
@@ -41,7 +41,7 @@ public class AdministerAction {
 	private Random random = new Random();
 
 	/**
-	 * Ã»ÓĞ@AdminAccess±êÇ©,Ôò±íÊ¾¿ÉÈÎÒâ·ÃÎÊ
+	 * æ²¡æœ‰@AdminAccessæ ‡ç­¾,åˆ™è¡¨ç¤ºå¯ä»»æ„è®¿é—®
 	 */
 	@RequestMapping(value = "/login.htm", method = RequestMethod.GET)
 	public void loginPage(@ModelAttribute("admin") Administer admin) throws IOException {
@@ -51,17 +51,17 @@ public class AdministerAction {
 	public String login(@ModelAttribute("admin") Administer admin, BindingResult result, HttpSession session)
 			throws IOException {
 		loginValidator.validate(admin, result);
-		// ´íÎó»ØÏÔ
+		// é”™è¯¯å›æ˜¾
 		if (result.hasErrors()) {
 			return "/admin/login";
 		}
-		// Ğ£ÑéÓÃ»§Ãû¿ÚÁî
+		// æ ¡éªŒç”¨æˆ·åå£ä»¤
 		AdministerAgent agent = new AdministerAgent(admin);
-		// ²¢ÇÒ»ñµÃÓÃ»§ËùÓĞµÄÈ¨ÏŞ
+		// å¹¶ä¸”è·å¾—ç”¨æˆ·æ‰€æœ‰çš„æƒé™
 		// List<FunctionsEnum> funs = Arrays.asList(FunctionsEnum.Fun2,
 		// FunctionsEnum.Fun6);
 		// agent.setFunctions(funs);
-		// Ëæ»ú·ÖÅäÁ½¸öÈ¨ÏŞ
+		// éšæœºåˆ†é…ä¸¤ä¸ªæƒé™
 		agent.setFunctions(random.nextInt(5));
 		agent.setFunctions(random.nextInt(5));
 		session.setAttribute(AdministerAgent.AdministerTag, agent);
@@ -69,7 +69,7 @@ public class AdministerAction {
 	}
 
 	/**
-	 * @AdminAccess() ±íÊ¾µÇÂ¼ÓÃ»§¾Í¿É·ÃÎÊ
+	 * @AdminAccess() è¡¨ç¤ºç™»å½•ç”¨æˆ·å°±å¯è®¿é—®
 	 */
 	@AdminAccess()
 	@RequestMapping(value = "/main.htm")
@@ -79,7 +79,7 @@ public class AdministerAction {
 
 	/**
 	 * @AdminAccess( { FunctionsEnum.Fun1, FunctionsEnum.Fun3 })
-	 * ±íÊ¾ÓĞfun1»òÕßfun3µÄadmin²ÅÄÜ·ÃÎÊ
+	 * è¡¨ç¤ºæœ‰fun1æˆ–è€…fun3çš„adminæ‰èƒ½è®¿é—®
 	 */
 	@AdminAccess({ FunctionsEnum.Fun1, FunctionsEnum.Fun3 })
 	@RequestMapping(value = "/fun1orfun3.htm")
@@ -87,21 +87,21 @@ public class AdministerAction {
 	}
 
 	/**
-	 * ¸üĞÂadminÊôĞÔ,ÏÈ½øÈë±à¼­Ò³Ãæ
+	 * æ›´æ–°adminå±æ€§,å…ˆè¿›å…¥ç¼–è¾‘é¡µé¢
 	 */
 	@RequestMapping(value = "/edit.htm", method = RequestMethod.GET)
 	public void load(@RequestParam("id") String id, ModelMap model) {
-		// ¸ù¾İid´ÓÊı¾İ¿âÖĞload Administer ¶ÔÏó,´Ëdemo¾Í¼òµ¥µãÖ±½ÓnewÒ»¸ö°É
+		// æ ¹æ®idä»æ•°æ®åº“ä¸­load Administer å¯¹è±¡,æ­¤demoå°±ç®€å•ç‚¹ç›´æ¥newä¸€ä¸ªå§
 		Administer admin = new Administer();
 		admin.setId(id);
-		admin.setLoginId("ÎÒ²âÊÔ");
-		admin.setRealName("ÆäÊµÎÒÊÇÒ»¸öÑİÔ±");
+		admin.setLoginId("æˆ‘æµ‹è¯•");
+		admin.setRealName("å…¶å®æˆ‘æ˜¯ä¸€ä¸ªæ¼”å‘˜");
 		model.addAttribute("admin", admin);
 	}
 
 	@RequestMapping(value = "/edit.htm", method = RequestMethod.POST)
 	public void update(@ModelAttribute("admin") Administer admin, BindingResult result) {
-		// Ê¹ÓÃvalidateĞ£Ñéadmin¶ÔÏó
-		// µ÷ÓÃservice¸üĞÂuser¶ÔÏó
+		// ä½¿ç”¨validateæ ¡éªŒadminå¯¹è±¡
+		// è°ƒç”¨serviceæ›´æ–°userå¯¹è±¡
 	}
 }

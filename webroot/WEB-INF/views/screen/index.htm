@@ -1,100 +1,22 @@
-demoÈ±Ê¡ÅäÖÃÎªÊ¹ÓÃhttp://localhost:8080·ÃÎÊ,Èç¹ûÄãµÄtomcat¶Ë¿Ú²»Í¬,ÇëĞŞ¸ÄWEB-INF/conf/server.properties
-<hr/>
-$iDemand.addJs('jquery')
-URLBrokerÑİÊ¾:<br/>
-ÎÒÀ´Ôì¸öappÁ´½Ó  $appServer.get('index.htm')  <br/>
-ÔÙÀ´Ôì¸ö  $appServer.get('search.htm').addQueryData('key','ÖĞÎÄËÑË÷').addQueryData('sort','price')  <br/>
-¾²Ì¬Í¼Æ¬Á´½Ó $imageServer.get('/e/f/ggg.png')<br/>
-https appÁ´½Ó $sslAppServer.get('index.htm')<br/>
-¶àÖ÷»úÁ´½Ó£¬Ö±½ÓÊä³öÏÔÊ¾ÅäÖÃµÄÒ»¸öÖ÷»ú£º$uploadServer ¹¹Ôìurl(È±Ê¡Ê¹ÓÃÁ´½Ó×Ö·û´®µÄhashCode¼ÆËã):$uploadServer.get('1.jpg') $uploadServer.get('2.jpg') $uploadServer.get('3.jpg') <br/>
-<hr/>
-<a href="$appServer.get('vpage.htm')">velocotyÒ³Ãæ</a> <br/>
-<a href="$appServer.get('jsppage.htm')">jspÒ³Ãæ</a> <br/>
-<hr/>
-spring mvc annotation ÑİÊ¾:<br/>
-action·½·¨·µ»ØÖµÑİÊ¾£¬AnnotationDemoAction.java
-<ul>
-<li><a href="$appServer.get('annotation/return/void.htm')">·µ»Ø void -- Method:annotationVoid</a></li>
-<li><a href="$appServer.get('/annotation/return/string.htm')">·µ»Ø String -- Method:annotationString</a></li>
-<li><a href="$appServer.get('/annotation/return/view.htm')">·µ»Ø view -- Method:annotationModelAndView</a></li>
-<script type="text/javascript">
-	$(document).ready(function() {
-		$("#json_return_href").click(function(){
-		jQuery.getJSON("$appServer.get('/annotation/return/json.json')",
-			function(data){
-				alert('name:'+data.name+' nick:'+data.nick+' age:'+data.age);
-			}); 
-		});
-		$("#json_bind_href").click(function(){
-		jQuery.ajax({
-			type: "POST",
-			url:"$appServer.get('/annotation/param/json.json')",
-			contentType:"application/json",
-			data:'{"name":"shaseng","nick":"sanshidi","age":250}',
-			dataType:"json",
-			success:function(data){
-				alert('name:'+data.name+' nick:'+data.nick+' age:'+data.age);
-			}
-		  })	
-		});
-	})
+<div class="melody-wrap">
+    <ul class="melody-list clearfix">
+        <li><a class="m-detail-link" href="$appServer.get('config/introduce.htm')"><i class="melody-ico ico-m1"></i><span>é…ç½®æ–‡ä»¶è¯´æ˜å’Œç¤ºä¾‹</span></a></li>
+        <li><a class="m-detail-link" href="$appServer.get('dir_url/introduce.htm')"><i class="melody-ico ico-m2"></i><span>ç›®å½•ç»“æ„è¯´æ˜å’Œç¤ºä¾‹</span></a></li>
+        <li><a class="m-detail-link" href="$appServer.get('webpages/introduce.htm')"><i class="melody-ico ico-m3"></i><span>é¡µé¢åˆ¶ä½œè¯´æ˜å’Œç¤ºä¾‹</span></a></li>
+        <li><a class="m-detail-link" href="$appServer.get('annotation/introduce.htm')"><i class="melody-ico ico-m4"></i><span>ä¼ å‚ã€è¿”å›å€¼è¯´æ˜å’Œç¤ºä¾‹</span></a></li>
+    </ul>
+    <ul class="melody-list clearfix">
+        <li><a class="m-detail-link" href="$appServer.get('nosession/introduce.htm')"><i class="melody-ico ico-m5"></i><span>nosessionæŠ€æœ¯</span></a></li>
+        <li><a class="m-detail-link" href="$appServer.get('login/introduce.htm')"><i class="melody-ico ico-m6"></i><span>è¡¨å•æäº¤å’Œè¡¨å•æ ¡éªŒ</span></a></li>
+        <li><a class="m-detail-link" href="$appServer.get('others/introduce.htm')"><i class="melody-ico ico-m7"></i><span>å…¶ä»–åŠŸèƒ½è¯´æ˜å’Œç¤ºä¾‹</span></a></li>
+    </ul>
+</div>
+<script>
+    $(function(){
+        $(window).resize(function(){
+            var h = window.innerHeight||document.body.clientHeight||document.documentElement.clientHeight;
+            $(".s-mod").css("height", h);
+        });
+        $(window).resize();
+    });
 </script>
-<li><a href="#" id="json_return_href">·µ»Ø json -- Method:annotationJson</a></li>
-</ul> 
-<br/>
-actionÈë²ÎÑİÊ¾ ,AnnotationDemoAction.java
-<ul>
-<li><a href="$appServer.get('annotation/param/base.htm').addQueryData('name','ÆëÌì')">»ù±¾ -- Method:annotationBase</a></li>
-<li><a href="$appServer.get('annotation/param/object_bind.htm').addQueryData('name','°Ë½ä').addQueryData('nick','¶şÊ¦ĞÖ').addQueryData('age','500')">¶ÔÏóÊôĞÔ×Ô´ø°ó¶¨ -- Method:annotationObjectBind</a></li>
-<li><a href="#" id="json_bind_href">json¶ÔÏó°ó¶¨ -- Method:annotationJsonBind</a></li>
-<li><a href="${appServer.get('movieUrl').put('movieName','matrix').put('shipId',66)}">REST·ç¸ñURL path²ÎÊı°ó¶¨ -- Method:annotationRestBind</a></li>
-</ul>
-<hr/>
-containÊ¹ÓÃÑİÊ¾:<br/>
-<ul>
-<li><a href="$appServer.get('ct/base.htm')">»ù±¾Ê¹ÓÃ</a></li>
-<li><a href="$appServer.get('ct/async.htm')">bigpipeÊ¹ÓÃ</a></li>
-</ul>
-<hr/>
-Ğ£ÑéÂëÑİÊ¾:<br/>
-<ul>
-<li><img src="$appServer.get('/checkcode/simple.htm')" /></li>
-<li><img src="$appServer.get('/checkcode/arithmetic.htm')" /></li>
-</ul>
-<hr/>
-±íµ¥³õÊ¼»¯/Ğ£Ñé/´¦ÀíÑİÊ¾Èë¿Ú£º<br>
-<a href="$!{appServer}/register.htm">ÓÃ»§×¢²á</a><br/>
-<a href="$!{appServer}/login.htm">ÓÃ»§µÇÂ¼</a><br/>
-<a href="$!{appServer}/admin/login.htm">¹ÜÀíÔ±µÇÂ¼</a><br/>
-<a href="$!{appServer}/admin/main.htm">Ö±½Ó·ÃÎÊÊÜ±£»¤url</a><br/>
-<a href="$!{appServer}/admin/edit.htm?id=13">±à¼­¹ÜÀíÓÃ»§</a><br/>
-<hr/>
-ÓÊ¼ş·¢ËÍÑİÊ¾Èë¿Ú£º<br>
-<a href="$!{appServer}/mail/send-simple-mail.htm">¼òµ¥ÓÊ¼ş·¢ËÍ</a>
-<a href="$!{appServer}/mail/send-velocity-mail.htm">¼òµ¥VelocityÄ£°åÓÊ¼ş·¢ËÍ</a>
-<a href="$!{appServer}/mail/send-velocity-layout-mail.htm">Velocity layoutÄ£°åÓÊ¼ş·¢ËÍ</a>
-<br/>
-<hr/>
-ÎÄ¼şÉÏ´«ÏÂÔØÑİÊ¾:<br/>
-<a href="$appServer.get('/upload/simple.htm')">ÎÄ¼şÉÏ´«</a><br/>
-<a href="$appServer.get('/download/excel.htm')">excelÎÄ¼şÏÂÔØ</a><br/>
-<hr/>
-<a href="$appServer.get('/cache/demo.htm')">velocityÒ³Ãæcache</a><br/>
-<hr/>
-·ÖÒ³ÑİÊ¾Èë¿Ú£º<br>
-<a href="$appServer.get('/query/form_page.htm')">formÌá½»·ÖÒ³</a><br/>
-<a href="$appServer.get('/query/seo_page.htm')">seo»¯¾²Ì¬Á´½Ó·ÖÒ³</a><br/>
-<hr/>
-<a href="$appServer.get('/i18n/index.htm')">¹ú¼Ê»¯</a><br/>
-<hr/>
-Ò³ÃæÊä³öÍ³¼Æ£º<br>
-<a href="$appServer.get('/report/output.htm')">Í³¼Æ</a><br/>
-<hr/>
-Èç¹ûÔÚweb-bean.xmlÖĞ¿ªÆôÁËResponseOutputBufferFilterµÄetagEnable(http cache)Ê±£¬<br/>
-Ò³Ãæ´øÓĞÈçĞ£ÑéÂëÖ®ÀàµÄ¶¯Ì¬ÄÚÈİ£¬Èç¹ûĞèÒªÈ¡Ïûhttp cache,ÔòÔÚvmÉÏÊ¹ÓÃ
-\$request.setAttribute('page_no_cache','true')
-$request.setAttribute('page_no_cache','true')<br/>
-<hr/>
-js rsa¼ÓÃÜÀı×Ó:<a href="$appServer.get('/rsa.htm')">µãÎÒ</a>
-<hr/>
-<a href="$appServer.get('/chat.htm')">WebSocketÁÄÌì</a>

@@ -1,2 +1,2 @@
-hello£¬ $!{name}£¡this is a letter from Velocity Layout/Screen
-<br/>·ÃÎÊ±¾Ó¦ÓÃ:$!{appServer.get('/index.htm')}
+helloï¼Œ $!{name}ï¼this is a letter from Velocity Layout/Screen
+<br/>è®¿é—®æœ¬åº”ç”¨:$!{appServer.get('/index.htm')}

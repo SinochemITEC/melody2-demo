@@ -1,0 +1,8 @@
+#if($!id)
+    ${id}号勇士开始攻略地下城了！<br/>
+    $aContain.get('/webpages/demo/questionResult.htm').put("id", ${id}).put("sleep",1000)
+    $aContain.get('/webpages/demo/questionResult.htm').put("id", ${id}).put("sleep",2000)
+    $aContain.get('/webpages/demo/questionResult.htm').put("id", ${id}).put("sleep",3000)
+    $aContain.get('/webpages/demo/questionResult.htm').put("id", ${id}).put("sleep",4000)
+    $aContain.get('/webpages/demo/questionResult.htm').put("id", ${id}).put("sleep",5000)
+#end

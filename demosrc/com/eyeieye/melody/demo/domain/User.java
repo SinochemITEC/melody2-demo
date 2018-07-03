@@ -1,10 +1,12 @@
 package com.eyeieye.melody.demo.domain;
 
+import com.eyeieye.melody.demo.util.MD5Encode;
+
 import java.io.Serializable;
 import java.util.Date;
 
 /**
- * �û�Domain
+ * 用户Domain
  * 
  * @author zhengdd
  * @version $Id: User.java,v 1.1 2011/06/20 07:43:14 fish Exp $
@@ -13,13 +15,32 @@ public class User implements Serializable {
 
 	private static final long serialVersionUID = 2310223785405914685L;
 
-	public static final String name = "userAgent";
+	public static final String NAME = "user";
 
+	private String uuid="";
 	private String realName;
 	private Date birthday;
 	private Integer age;
 	private NativePlace nativePlace;
 	private String password;
+	private String lastToken;// 最后一次的验证码
+	private Date loginTime;
+
+	public Date getLoginTime() {
+		return loginTime;
+	}
+
+	public void setLoginTime(Date loginTime) {
+		this.loginTime = loginTime;
+	}
+
+	public String getLastToken() {
+		return lastToken;
+	}
+
+	public void setLastToken(String lastToken) {
+		this.lastToken = lastToken;
+	}
 
 	public String getRealName() {
 		return realName;
@@ -59,6 +80,18 @@ public class User implements Serializable {
 
 	public void setAge(Integer age) {
 		this.age = age;
+	}
+
+	public String getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
+
+	public void updateUuid() throws Exception {
+		this.uuid = MD5Encode.encode(realName+new Date().getTime());
 	}
 
 }

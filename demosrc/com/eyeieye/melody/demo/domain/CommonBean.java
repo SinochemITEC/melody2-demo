@@ -5,32 +5,32 @@ import java.util.Locale;
 import com.eyeieye.melos.web.locale.velocity.LocaleRender;
 
 /**
- * ÑİÊ¾ÈçºÎÔÚÒ³ÃæÉÏ×Ô¶¯¸ù¾İµ±Ç°·ÃÎÊÕÛµÄlocaleÊä³ö
- * 
+ * æ¼”ç¤ºå¦‚ä½•åœ¨é¡µé¢ä¸Šè‡ªåŠ¨æ ¹æ®å½“å‰è®¿é—®æŠ˜çš„localeè¾“å‡º
+ *
  * @author fish
- * 
+ *
  */
 public class CommonBean {
-	// ÖĞÎÄÃû³Æ
+	// ä¸­æ–‡åç§°
 	private String nameGb;
 
-	// Ó¢ÎÄÃû³Æ
+	// è‹±æ–‡åç§°
 	private String nameEn;
 
 	/**
-	 * µÃµ½×Ô¶¯Êä³öµÄ°ü×°Àà,demoÖĞÖ»Çø·ÖÁËÓïÑÔ,Ã»ÓĞÇø·Ö¹ú¼Ò
-	 * 
+	 * å¾—åˆ°è‡ªåŠ¨è¾“å‡ºçš„åŒ…è£…ç±»,demoä¸­åªåŒºåˆ†äº†è¯­è¨€,æ²¡æœ‰åŒºåˆ†å›½å®¶
+	 *
 	 * @return
 	 */
 	public LocaleRender getNameLocale() {
 		return new LocaleRender() {
 			@Override
 			public String getByLocale(Locale locale) {
-				// Èç¹ûµ±Ç°ÓïÑÔÎªÓ¢ÓïÔòÊä³önameEn
+				// å¦‚æœå½“å‰è¯­è¨€ä¸ºè‹±è¯­åˆ™è¾“å‡ºnameEn
 				if (locale.getLanguage().equals("en")) {
 					return nameEn;
 				}
-				// Èç¹ûÊÇººÓï,²¢ÇÒÈ±Ê¡Ò²ÊÇÊä³öÖĞÎÄ
+				// å¦‚æœæ˜¯æ±‰è¯­,å¹¶ä¸”ç¼ºçœä¹Ÿæ˜¯è¾“å‡ºä¸­æ–‡
 				return nameGb;
 			}
 		};

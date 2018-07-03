@@ -19,10 +19,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.eyeieye.melody.demo.query.QueryBase;
 
 /**
- * ·ÖÒ³²ÎÊı´«Èë(Á½ÖÖ·½Ê½±ØÑ¡ÆäÒ»): put("slider_query",$QueryBase ×ÓÀà)
- * 
- * È±Ê¡·ÖÒ³urlÊ¹ÓÃ $appServerÉú³Éurl,ÈçĞèÖ¸¶¨,ÔòÊ¹ÓÃ put('slider_borker',$broker)
- * Èç¹ûÒªÖ¸¶¨vm£¬Çëput('slider_path',vmÂ·¾¶) Èç¹ûÒªÖ¸¶¨¸¡¶¯´°´óĞ¡,Çëput('slider_width',int)£¬·ñÔòÊ¹ÓÃÈ±Ê¡Öµ
+ * åˆ†é¡µå‚æ•°ä¼ å…¥(ä¸¤ç§æ–¹å¼å¿…é€‰å…¶ä¸€): put("slider_query",$QueryBase å­ç±»)
+ *
+ * ç¼ºçœåˆ†é¡µurlä½¿ç”¨ $appServerç”Ÿæˆurl,å¦‚éœ€æŒ‡å®š,åˆ™ä½¿ç”¨ put('slider_borker',$broker)
+ * å¦‚æœè¦æŒ‡å®švmï¼Œè¯·put('slider_path',vmè·¯å¾„) å¦‚æœè¦æŒ‡å®šæµ®åŠ¨çª—å¤§å°,è¯·put('slider_width',int)ï¼Œå¦åˆ™ä½¿ç”¨ç¼ºçœå€¼
  */
 @Controller
 public class PageSlider {
@@ -30,7 +30,7 @@ public class PageSlider {
 	public static final Log logger = LogFactory.getLog(PageSlider.class);
 
 	/**
-	 * ¸¡¶¯´°´óĞ¡£¬Ó¦¸ÃÊÇÆæÊıÎªºÃ
+	 * æµ®åŠ¨çª—å¤§å°ï¼Œåº”è¯¥æ˜¯å¥‡æ•°ä¸ºå¥½
 	 */
 	private int defaultSliderWidth = 5;
 
@@ -41,16 +41,16 @@ public class PageSlider {
 	private String defaultPageParameterName = "page";
 
 	/**
-	 * È±Ê¡formÌá½»µÄ·½Ê½Îªpost
+	 * ç¼ºçœformæäº¤çš„æ–¹å¼ä¸ºpost
 	 */
 	private String defaultFormPageMethod = "post";
 
 	private Random random = new Random();
 
 	/**
-	 * Ê¹ÓÃformÌá½»½øĞĞ·ÖÒ³,Èë²ÎÎªÒÔÏÂÖµ .·ÖÒ³url(±ØĞè):put('slider_target',$·ÖÒ³Ìá½»µÄurl(Ö»°üº¬Â·¾¶))
-	 * Èç¹ûÒªÖ¸¶¨·ÖÒ³±äÁ¿Ãû(È±Ê¡Îª"page"),Ôòput('slider_page',$·ÖÒ³±äÁ¿Ãû³Æ)
-	 * Èç¹ûÒªÖ¸¶¨·ÖÒ³Ìá½»ÎªGET·½Ê½¶ø²»ÊÇPOST,Ôòput('slider_method','get')
+	 * ä½¿ç”¨formæäº¤è¿›è¡Œåˆ†é¡µ,å…¥å‚ä¸ºä»¥ä¸‹å€¼ .åˆ†é¡µurl(å¿…éœ€):put('slider_target',$åˆ†é¡µæäº¤çš„url(åªåŒ…å«è·¯å¾„))
+	 * å¦‚æœè¦æŒ‡å®šåˆ†é¡µå˜é‡å(ç¼ºçœä¸º"page"),åˆ™put('slider_page',$åˆ†é¡µå˜é‡åç§°)
+	 * å¦‚æœè¦æŒ‡å®šåˆ†é¡µæäº¤ä¸ºGETæ–¹å¼è€Œä¸æ˜¯POST,åˆ™put('slider_method','get')
 	 */
 	@RequestMapping("/contain/formPageSlider.htm")
 	public ModelAndView formPage(HttpServletRequest request) throws Exception {
@@ -112,8 +112,7 @@ public class PageSlider {
 	}
 
 	/**
-	 * Ê¹ÓÃGET·½Ê½,Ò²¾ÍÊÇÆÕÍ¨³¬Á¬½Ó·½Ê½·ÖÒ³,Èë²ÎÎª. ±ØĞè:put('slider_builder',$PagingURLBuilder)
-	 * 
+	 * ä½¿ç”¨GETæ–¹å¼,ä¹Ÿå°±æ˜¯æ™®é€šè¶…è¿æ¥æ–¹å¼åˆ†é¡µ,å…¥å‚ä¸º. å¿…éœ€:put('slider_builder',$PagingURLBuilder)
 	 */
 	@RequestMapping("/contain/pageSlider.htm")
 	public ModelAndView handleRequest(HttpServletRequest request)
@@ -165,7 +164,7 @@ public class PageSlider {
 	}
 
 	protected static List<Integer> getGrids(int totalPage, int currentPage,
-			int width) {
+											int width) {
 		int widthHalf = width / 2;
 		List<Integer> grids = new ArrayList<Integer>();
 		for (int i = 1; i <= min(width, currentPage); i++) {

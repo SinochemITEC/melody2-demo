@@ -1,7 +1,7 @@
 <form id="editAdmin" action="${appServer}/admin/edit.htm" method="post">
     <table>
         <tr>
-            <th>µÇÂ¼Ãû</th>
+            <th>ç™»å½•å</th>
             <td>
                 #springBind("admin.loginId")
                 <input type="text" id="loginId" name="${status.expression}" value="$!{status.value}" />
@@ -9,7 +9,7 @@
             </td>
 		</tr>
 		<tr>
-            <th>ÕæÊµĞÕÃû</th>
+            <th>çœŸå®å§“å</th>
             <td>
                 #springBind("admin.realName")
                 <input type="text" id="realName" name="${status.expression}" value="$!{status.value}" />
@@ -18,7 +18,7 @@
 		</tr>
 		<tr>	
             <th>
-                <input type="submit" value="ĞŞ¸Ä" />
+                <input type="submit" value="ä¿®æ”¹" />
             </th>
 			<td>&nbsp;</td>
         </tr>

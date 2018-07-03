@@ -3,7 +3,7 @@ package com.eyeieye.melody.demo.domain;
 import java.io.Serializable;
 
 /**
- * ×ÊÔ´Domain
+ * èµ„æºDomain
  * 
  * @author zhengdd
  * @version $Id: Resource.java,v 1.1 2011/06/20 07:43:14 fish Exp $

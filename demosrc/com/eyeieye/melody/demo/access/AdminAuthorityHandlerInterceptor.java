@@ -16,7 +16,7 @@ import com.eyeieye.melody.demo.domain.AdministerAgent;
 import com.eyeieye.melody.demo.enums.FunctionsEnum;
 
 /**
- * ¹ÜÀí¶ËÈ¨ÏŞÀ¹½Ø¿ØÖÆÆ÷£¬¸ù¾İ @AdminAccess annotationí˜ËÓ›ß@‚€îµÄ·½·¨ĞèÒª™àÏŞ¿ØÖÆ£¬
+ * ç®¡ç†ç«¯æƒé™æ‹¦æˆªæ§åˆ¶å™¨ï¼Œæ ¹æ® @AdminAccess annotationä¾†æ¨™è¨˜é€™å€‹é¡çš„æ–¹æ³•éœ€è¦æ¬Šé™æ§åˆ¶ï¼Œ
  * 
  * @author fish
  * 
@@ -34,26 +34,26 @@ public class AdminAuthorityHandlerInterceptor extends HandlerInterceptorAdapter
 				.getAttribute(AdministerAgent.AdministerTag);
 		if (!pass(agent, handler)) {
 			throw new AdminAccessDeniedException();
-			// µ½Òì³£¿ØÖÆÀàÖĞÈ¥´¦Àí
+			// åˆ°å¼‚å¸¸æ§åˆ¶ç±»ä¸­å»å¤„ç†
 		}
 		return true;
 	}
 
 	private Map<Object, FunctionsEnum[]> caches = new ConcurrentHashMap<Object, FunctionsEnum[]>();
 
-	private Map<Object, Integer> noControlCaches = new ConcurrentHashMap<Object, Integer>();// Ã»ÓĞÅäÖÃAdminAccessµÄmethod
+	private Map<Object, Integer> noControlCaches = new ConcurrentHashMap<Object, Integer>();// æ²¡æœ‰é…ç½®AdminAccessçš„method
 
 	private boolean pass(AdministerAgent user, Object handler) {
 		FunctionsEnum[] funs = null;
 		funs = this.caches.get(handler);
 		if (funs == null) {
 			if (noControlCaches.containsKey(handler)) {
-				// Ã»ÓĞAdminAccess ÅäÖÃ£¬ÔÊĞíÈÎÒâ·ÃÎÊ
+				// æ²¡æœ‰AdminAccess é…ç½®ï¼Œå…è®¸ä»»æ„è®¿é—®
 				return true;
 			}
 			AdminAccess access = findAdminAccess(handler);
 			if (access == null) {
-				// Ã»ÓĞÅäÖÃAdminAccess
+				// æ²¡æœ‰é…ç½®AdminAccess
 				noControlCaches.put(handler, placeholder);
 				return true;
 			}
@@ -61,10 +61,10 @@ public class AdminAuthorityHandlerInterceptor extends HandlerInterceptorAdapter
 			this.caches.put(handler, funs);
 		}
 		if (funs.length == 0) {
-			// Èç¹ûÅäÖÃÁËÈ±Ê¡µÄAdminAccess,±íÊ¾Ö»ÒªµÇÂ¼¾ÍÄÜ·ÃÎÊ
+			// å¦‚æœé…ç½®äº†ç¼ºçœçš„AdminAccess,è¡¨ç¤ºåªè¦ç™»å½•å°±èƒ½è®¿é—®
 			return user != null;
 		}
-		// ÅäÖÃÁËAdminAccess
+		// é…ç½®äº†AdminAccess
 		if (user != null) {
 			for (FunctionsEnum em : funs) {
 				if (user.haveFunction(em)) {
@@ -76,7 +76,7 @@ public class AdminAuthorityHandlerInterceptor extends HandlerInterceptorAdapter
 	}
 
 	/**
-	 * ×÷ÎªÒ»¸ödemo,ÕâÀïÂß¼­¼òÂÔÁË
+	 * ä½œä¸ºä¸€ä¸ªdemo,è¿™é‡Œé€»è¾‘ç®€ç•¥äº†
 	 * 
 	 * @param handler
 	 * @return

@@ -3,11 +3,12 @@ package com.eyeieye.melody.demo.domain;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Random;
 
 import com.eyeieye.melody.demo.enums.FunctionsEnum;
 
 /**
- * ºóÌ¨ÓÃ»§µÄcookie³Ö¾Ã»¯¶ÔÏó
+ * éšåº¡å½´é¢ã„¦åŸ›é¨åˆ¢ookieé¸ä½·ç®™é–æ §î‡®ç’ï¿½
  * 
  * @author fish
  * 
@@ -19,11 +20,11 @@ public class AdministerAgent implements Serializable {
 	 */
 	private static final long serialVersionUID = 9163698778206514702L;
 
-	public static final String AdministerTag = "administerAgent";
+	public static final String AdministerTag = "_administerAgent";
 
 	private String loginId;
 
-	private BigInteger functions;// ÒÔ2½øÖÆÎ»¼ÍÂ¼¹ÜÀíÔ±ÓÃ»§µÄÈ¨ÏŞ
+	private BigInteger functions;// ä»¥2è¿›åˆ¶ä½çºªå½•ç®¡ç†å‘˜ç”¨æˆ·çš„æƒé™
 
 	public AdministerAgent() {
 		super();
@@ -35,7 +36,7 @@ public class AdministerAgent implements Serializable {
 	}
 
 	/**
-	 * ÔÚÖ¸¶¨µÄ2½øÖÆÎ»ÉÏÊÇ·ñÓĞÈ¨ÏŞ
+	 * åœ¨æŒ‡å®šçš„2è¿›åˆ¶ä½ä¸Šæ˜¯å¦æœ‰æƒé™
 	 * 
 	 * @param index
 	 * @return
@@ -45,7 +46,7 @@ public class AdministerAgent implements Serializable {
 	}
 
 	/**
-	 * ÊÇ·ñÓµÓĞÈ¨ÏŞ
+	 * æ˜¯å¦æ‹¥æœ‰æƒé™
 	 * 
 	 * @param fe
 	 * @return
@@ -55,7 +56,7 @@ public class AdministerAgent implements Serializable {
 	}
 
 	/**
-	 * ÉèÖÃÓÃ»§µÄÈ¨ÏŞ,Êµ¼ÊÓ¦ÓÃ¿ÉÒÔÊ¹ÓÃ×ÔÔöµÄÈ¨ÏŞ±íidµÈÎ¨Ò»²¢ÇÒÁ¬ĞøµÄÕıÕûÊıÌæ»»ÕâÀïµÄenum.ordinal
+	 * è®¾ç½®ç”¨æˆ·çš„æƒé™,å®é™…åº”ç”¨å¯ä»¥ä½¿ç”¨è‡ªå¢çš„æƒé™è¡¨idç­‰å”¯ä¸€å¹¶ä¸”è¿ç»­çš„æ­£æ•´æ•°æ›¿æ¢è¿™é‡Œçš„enum.ordinal
 	 * 
 	 * @param funs
 	 */
@@ -71,6 +72,10 @@ public class AdministerAgent implements Serializable {
 			this.functions = new BigInteger("0");
 		}
 		this.functions = this.functions.setBit(pos);
+	}
+
+	public void clearFunctions(){
+		this.functions = new BigInteger("0");
 	}
 
 	public String getLoginId() {

@@ -18,7 +18,7 @@ public class Page {
 			@RequestParam(value = "page", required = false, defaultValue = "1") int page,
 			@RequestParam(value = "apage", required = false) Integer pageAgain,
 			ModelMap model) throws Exception {
-		// Ä£Äâ·ÖÒ³µÄÇé¿ö
+		// æ¨¡æ‹Ÿåˆ†é¡µçš„æƒ…å†µ
 		UserQuery query = new UserQuery();
 		query.setTotalItem(9999);
 		if (pageAgain != null) {
@@ -28,7 +28,7 @@ public class Page {
 		}
 		model.put("query", query);
 	}
-	
+
 
 	@RequestMapping("/seo_page.htm")
 	public void seoPage(ModelMap model) throws Exception {
@@ -37,10 +37,10 @@ public class Page {
 
 	@RequestMapping("/{paramOne}/{paramTwo}/{page}.htm")
 	public String page(@PathVariable("paramOne") String paramOne,
-			@PathVariable("paramTwo") String paramTwo,
-			@PathVariable(value = "page") int page, ModelMap model)
+					   @PathVariable("paramTwo") String paramTwo,
+					   @PathVariable(value = "page") int page, ModelMap model)
 			throws Exception {
-		// Ä£Äâ·ÖÒ³µÄÇé¿ö
+		// æ¨¡æ‹Ÿåˆ†é¡µçš„æƒ…å†µ
 		UserQuery query = new UserQuery();
 		query.setTotalItem(9999);
 		query.setCurrentPage(page);

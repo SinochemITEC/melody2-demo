@@ -1,26 +1,20 @@
 package com.eyeieye.melody.demo.web.action.annotation;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.eyeieye.melos.web.url.URLBroker;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonSerializer;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
  * 
@@ -30,11 +24,12 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 @Controller
 @RequestMapping("/annotation")
 public class AnnotationDemoAction {
+	@Autowired
+	URLBroker appServerBroker;
+
 
 	/**
-	 * ·½·¨·µ»Øvoid,Ôò¸ù¾İurlÑ°ÕÒÊÓÍ¼£¬´ËÀı×ÓÖĞ£¬Ñ°ÕÒÃû³ÆÎª"annotation/return/void"µÄ view
-	 * 
-	 * @param model
+	 * æ–¹æ³•è¿”å›void,åˆ™æ ¹æ®urlå¯»æ‰¾è§†å›¾ï¼Œæ­¤ä¾‹å­ä¸­ï¼Œå¯»æ‰¾åç§°ä¸º"annotation/return/void"çš„ view
 	 */
 	@RequestMapping("/return/void.htm")
 	public void annotationVoid(ModelMap model) {
@@ -42,20 +37,25 @@ public class AnnotationDemoAction {
 	}
 
 	/**
-	 * ·½·¨·µ»ØString,Ôò¸ù¾İ·µ»ØÖµÑ°ÕÒÊÓÍ¼£¬´ËÀı×ÓÖĞ£¬Ñ°ÕÒÃû³ÆÎª"annotation/return/im_string"µÄ view
-	 * 
-	 * @param model
+	 * æ–¹æ³•è¿”å›String,åˆ™æ ¹æ®è¿”å›å€¼å¯»æ‰¾è§†å›¾ï¼Œæ­¤ä¾‹å­ä¸­ï¼Œå¯»æ‰¾åç§°ä¸º"annotation/return/forward"çš„ view
 	 */
-	@RequestMapping("/return/string.htm")
-	public String annotationString(Map<String, Object> map) {
+	@RequestMapping("/return/string_forward.htm")
+	public String annotationString(ModelMap modelMap) {
+		//map.put("currentTime", new Date());
+		modelMap.put("currentTime",new Date());
+		return "annotation/return/forward";
+	}
+	@RequestMapping("/return/string_redirect.htm")
+	public String annotationStringRedirect(ModelMap map) {
 		map.put("currentTime", new Date());
-		return "annotation/return/im_string";
+		return "redirect:"+appServerBroker.get("/annotation/return/redirect.htm");
+		/**ä¸ç”¨å®Œæ•´URLåŒæ ·å¯è¡Œ**/
+		//return "redirect:/annotation/return/redirect.htm");
 	}
 
+
 	/**
-	 * ·½·¨·µ»Øview,Ôò¸ù¾İurlÑ°ÕÒÊÓÍ¼£¬´ËÀı×ÓÖĞ£¬Ñ°ÕÒÃû³ÆÎª"annotation/return/model_view"µÄ view
-	 * 
-	 * @param model
+	 * æ–¹æ³•è¿”å›view,åˆ™æ ¹æ®urlå¯»æ‰¾è§†å›¾ï¼Œæ­¤ä¾‹å­ä¸­ï¼Œå¯»æ‰¾åç§°ä¸º"annotation/return/model_view"çš„ view
 	 */
 	@RequestMapping("/return/view.htm")
 	public ModelAndView annotationModelAndView() {
@@ -65,37 +65,35 @@ public class AnnotationDemoAction {
 	}
 
 	/**
-	 * ·½·¨·µ»ØObject(·ÇString,int,longµÈ),Ôò°Ñ·µ»Ø¶ÔÏó½âÎö³Éjson·µ»Ø
-	 * 
-	 * @param model
+	 * æ–¹æ³•è¿”å›Object(éString,int,longç­‰),åˆ™æŠŠè¿”å›å¯¹è±¡è§£ææˆjsonè¿”å›
 	 */
-	@RequestMapping("/return/json.json")
+	@RequestMapping("/return/json")
 	public @ResponseBody
 	West annotationJson() {
 		West w = new West();
-		w.setAge(500);
-		w.setName("Îò¿Õ");
-		w.setNick("´óÊ¦ĞÖ");
+		w.setAge(Integer.valueOf(new SimpleDateFormat("yyyy").format(new Date())) - 1867);
+		w.setName("DIO BRANDO");
+		w.setNick("DIO");
 		return w;
 	}
 
 	@RequestMapping("/param/base.htm")
 	public void annotationBase(HttpServletRequest request,
-			@RequestParam("name") String name,
-			@RequestParam(required = false, defaultValue = "1") int size,
-			Model model) {
+							   @RequestParam String name,
+							   @RequestParam(required = false, defaultValue = "1") int size,
+							   Model model) {
 		String ip = request.getRemoteAddr();
 		model.addAttribute("ip", ip);
 		model.addAttribute("name", name);
 		model.addAttribute("size", size);
 	}
 
-	public static class WestJsonSerializer extends JsonSerializer<Integer> {
+	public static class WestJsonSerializer extends org.codehaus.jackson.map.JsonSerializer<Integer> {
 
 		@Override
-		public void serialize(Integer west, JsonGenerator jg,
-				SerializerProvider sp) throws IOException,
-				JsonProcessingException {
+		public void serialize(Integer west, org.codehaus.jackson.JsonGenerator jg,
+							  org.codehaus.jackson.map.SerializerProvider sp) throws IOException,
+				org.codehaus.jackson.JsonProcessingException {
 			jg.writeNumber(west + 19);
 		}
 	}
@@ -122,7 +120,7 @@ public class AnnotationDemoAction {
 			this.nick = nick;
 		}
 
-		@JsonSerialize(using = WestJsonSerializer.class)
+		@org.codehaus.jackson.map.annotate.JsonSerialize(using = WestJsonSerializer.class)
 		public int getAge() {
 			return age;
 		}
@@ -132,16 +130,21 @@ public class AnnotationDemoAction {
 		}
 	}
 
-	@RequestMapping("/param/object_bind.htm")
+	@RequestMapping("/param/simple_object_bind.htm")
 	public void annotationObjectBind(West obj, Model model) {
 		model.addAttribute("obj", obj);
 	}
 
+	@RequestMapping("/param/spring_object_bind.htm")
+	public String springObjectBind(@ModelAttribute("west") West west, Model model) {
+		model.addAttribute("west", west);
+		return "/annotation/param/spring_object_bind";
+	}
 	@RequestMapping("/param/json")
 	public @ResponseBody
 	West annotationJsonBind(@RequestBody West west) {
-		west.name = west.name += "~·şÎñÆ÷";
-		west.nick = west.nick += "~ÓÖÊÇ·şÎñÆ÷";
+		west.name = west.name;
+		west.nick = west.nick;
 		west.age = west.age += 250;
 		return west;
 	}
@@ -152,6 +155,6 @@ public class AnnotationDemoAction {
 			@PathVariable("shipId") long shipId, Model model) {
 		model.addAttribute("movieName", moveName);
 		model.addAttribute("shipId", shipId);
-		return "annotation/param/movie";
+		return "annotation/param/RESTful";
 	}
 }

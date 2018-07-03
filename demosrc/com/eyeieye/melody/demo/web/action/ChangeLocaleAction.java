@@ -15,27 +15,27 @@ import org.springframework.web.servlet.LocaleResolver;
 
 import com.eyeieye.melos.util.StringUtil;
 
-
 @Controller
 @RequestMapping(value = "/locale")
 public class ChangeLocaleAction {
 	@Autowired
 	private LocaleResolver localeResolver;
 
+
 	@RequestMapping("/change.htm")
 	public void change(@RequestParam("locale") String locale,
-			HttpServletRequest request, HttpServletResponse response)
+					   HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
 		LocaleEditor le = new LocaleEditor();
 		le.setAsText(locale);
 		Locale get = (Locale) le.getValue();
 		this.localeResolver.setLocale(request, response, get);
-		// demo¼òµ¥´¦Àí,Ö»ÒªÓĞÔ­Ò³Ãæ¾ÍÖØĞÂ¼ÓÔØ,²»×ö²ÎÊı´¦Àí,ËùÒÔpostÌá½»µÄÒ³Ãæ»áÓĞÎÊÌâ
+		// demoç®€å•å¤„ç†,åªè¦æœ‰åŸé¡µé¢å°±é‡æ–°åŠ è½½,ä¸åšå‚æ•°å¤„ç†,æ‰€ä»¥postæäº¤çš„é¡µé¢ä¼šæœ‰é—®é¢˜
 		String s = request.getHeader("Referer");
 		if (StringUtil.isNotBlank(s)) {
 			response.sendRedirect(s);
 			return;
 		}
-		response.sendRedirect("i18n/index.htm");
+		response.sendRedirect("/index.htm");
 	}
 }

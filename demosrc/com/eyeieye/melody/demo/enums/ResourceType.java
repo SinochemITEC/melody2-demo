@@ -2,8 +2,8 @@ package com.eyeieye.melody.demo.enums;
 
 public enum ResourceType {
 
-    PROVINCE("province", "省份"),
-    CITY("city", "城市");
+    PROVINCE("province", "鐪佷唤"),
+    CITY("city", "鍩庡競");
 
     private String name;
     private String desc;

@@ -5,7 +5,7 @@
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
            http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context-3.0.xsd">
-	<context:component-scan base-package="com.eyeieye.melos.demo.service" />
+	<context:component-scan base-package="com.eyeieye.melody.demo.service" />
 
 	<bean id="messageSource"
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
@@ -22,7 +22,8 @@
 	<bean id="rsaCrypto" class="com.eyeieye.melos.util.crypto.impl.BcprovRsaCryptoImpl">
 		<property name="rsaKeyFile" value="WEB-INF/conf/rsa.key"></property>
 	</bean>
-	
+
+    <bean id="encode" class="com.eyeieye.melos.util.DefaultEncode"/>
 	<bean class="com.eyeieye.melos.web.nosession.SessionCookieStoreConfig">
 		<property name="cookieName" value="us"/>
 		<property name="attributeNames">
@@ -30,6 +31,38 @@
 				<value>administerAgent</value>
 				<value>userAgent</value>
 			</set>
+		</property>
+		<property name="domain" value="${session.meta.cookie.domain}"/>
+		<property name="path" value="/"/>
+	</bean>
+
+
+	<bean class="com.eyeieye.melos.web.url.URLBrokerLauncherInterceptor">
+		<property name="brokers">
+			<map>
+				<entry key="mailServer" value-ref="mailServer"/>
+			</map>
+		</property>
+	</bean>
+
+	<bean class="com.eyeieye.melos.web.url.ServletContextInitHelper">
+		<property name="brokers">
+			<list>
+				<ref bean="mailServer" />
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="mailServer" class="com.eyeieye.melos.web.url.URLBroker">
+		<property name="encoding" value="${web.encoding}"></property>
+		<property name="config">
+			<bean class="com.eyeieye.melos.web.url.URLConfig">
+				<property name="host" value="${mail.server.host}"></property>
+				<property name="port" value="${mail.server.port}"></property>
+				<property name="path" value="${mail.server.path}"></property>
+				<property name="followContextPath" value="true"></property>
+			</bean>
 		</property>
 	</bean>
 </beans>

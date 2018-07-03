@@ -17,9 +17,9 @@ import com.eyeieye.melody.demo.access.AdminAccessDeniedException;
 import com.eyeieye.melody.demo.domain.AdministerAgent;
 
 /**
- * 
+ *
  * @author fish
- * 
+ *
  */
 public class MelodyDmoExceptionResolver implements HandlerExceptionResolver {
 	private static final Log logger = LogFactory.getLog(MelodyDmoExceptionResolver.class);
@@ -55,7 +55,7 @@ public class MelodyDmoExceptionResolver implements HandlerExceptionResolver {
 	}
 
 	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler,
-			Exception ex) {
+										 Exception ex) {
 		if (ex instanceof AdminAccessDeniedException) {
 			return resolveAdminAccessDeniedException(null, request);
 		}
@@ -65,7 +65,7 @@ public class MelodyDmoExceptionResolver implements HandlerExceptionResolver {
 
 	private ModelAndView resolveAdminAccessDeniedException(HttpSession session, HttpServletRequest request) {
 		AdministerAgent agent = (AdministerAgent) session.getAttribute(AdministerAgent.AdministerTag);
-		if (agent == null) {// Ã»µÇÂ¼£¬¶¨Ïòµ½µÇÂ¼½çÃæ
+		if (agent == null) {// Ã»ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½òµ½µï¿½Â¼ï¿½ï¿½ï¿½ï¿½
 			String returnUrl = getReturnUrl(request);
 			return new ModelAndView("redirect:" + adminLoginPath, adminLoginReturnParameterName, returnUrl);
 		}

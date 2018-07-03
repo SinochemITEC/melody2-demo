@@ -6,11 +6,11 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 
 /**
- * ·ÖÒ³Ëã·¨·â×°¡£ ·ÖÒ³ĞëÉèÖÃ: TotalItem£¨×ÜÌõÊı£©,È±Ê¡Îª0, Ó¦¸ÃÔÚdaoÖĞ±»ÉèÖÃ PageSize£¨Ã¿Ò³ÌõÊı£©£¬Ó¦ÔÚweb²ã±»ÉèÖÃ
- * QueryBase È±Ê¡Îª20£¬×ÓÀà¿ÉÒÔÍ¨¹ı¸²¸Ç getDefaultPageSize() ĞŞ¸Ä CurrentPage£¨µ±Ç°Ò³£©,È±Ê¡Îª1£¬Ê×Ò³£¬
- * Ó¦ÔÚweb²ã±»ÉèÖÃ ·ÖÒ³ºó£¬¿ÉÒÔµÃµ½£ºTotalPage£¨×ÜÒ³Êı£© FristItem(µ±Ç°Ò³¿ªÊ¼¼ÇÂ¼Î»ÖÃ£¬´Ó1¿ªÊ¼¼ÇÊı)
- * PageLastItem(µ±Ç°Ò³×îºó¼ÇÂ¼Î»ÖÃ) Ò³ÃæÉÏ£¬Ã¿Ò³ÏÔÊ¾ÌõÊıÃû×ÖÓ¦Îª£º lines £¬µ±Ç°Ò³Ãû×ÖÓ¦Îª£º page
- * 
+ * åˆ†é¡µç®—æ³•å°è£…ã€‚ åˆ†é¡µé¡»è®¾ç½®: TotalItemï¼ˆæ€»æ¡æ•°ï¼‰,ç¼ºçœä¸º0, åº”è¯¥åœ¨daoä¸­è¢«è®¾ç½® PageSizeï¼ˆæ¯é¡µæ¡æ•°ï¼‰ï¼Œåº”åœ¨webå±‚è¢«è®¾ç½®
+ * QueryBase ç¼ºçœä¸º20ï¼Œå­ç±»å¯ä»¥é€šè¿‡è¦†ç›– getDefaultPageSize() ä¿®æ”¹ CurrentPageï¼ˆå½“å‰é¡µï¼‰,ç¼ºçœä¸º1ï¼Œé¦–é¡µï¼Œ
+ * åº”åœ¨webå±‚è¢«è®¾ç½® åˆ†é¡µåï¼Œå¯ä»¥å¾—åˆ°ï¼šTotalPageï¼ˆæ€»é¡µæ•°ï¼‰ FristItem(å½“å‰é¡µå¼€å§‹è®°å½•ä½ç½®ï¼Œä»1å¼€å§‹è®°æ•°)
+ * PageLastItem(å½“å‰é¡µæœ€åè®°å½•ä½ç½®) é¡µé¢ä¸Šï¼Œæ¯é¡µæ˜¾ç¤ºæ¡æ•°åå­—åº”ä¸ºï¼š lines ï¼Œå½“å‰é¡µåå­—åº”ä¸ºï¼š page
+ *
  * @author fish
  */
 public abstract class QueryBase implements Serializable {
@@ -183,7 +183,7 @@ public abstract class QueryBase implements Serializable {
 	public int getPageFristItem() {
 		int cPage = this.getCurrentPage().intValue();
 		if (cPage == 1) {
-			return 1; // µÚÒ»Ò³¿ªÊ¼µ±È»ÊÇµÚ 1 Ìõ¼ÇÂ¼
+			return 1; // ç¬¬ä¸€é¡µå¼€å§‹å½“ç„¶æ˜¯ç¬¬ 1 æ¡è®°å½•
 		}
 		cPage--;
 		int pgSize = this.getPageSize().intValue();
@@ -192,7 +192,7 @@ public abstract class QueryBase implements Serializable {
 	}
 
 	/**
-	 * Èç¹ûÊÇmysql£¬ÄÇÃ´¸Ã·µ»ØµÄµÚÒ»Ìõ¼ÇÂ¼Ó¦¸ÃÊÇ0
+	 * å¦‚æœæ˜¯mysqlï¼Œé‚£ä¹ˆè¯¥è¿”å›çš„ç¬¬ä¸€æ¡è®°å½•åº”è¯¥æ˜¯0
 	 */
 	public int getMysqlPageFristItem() {
 		return getPageFristItem() - 1;
@@ -224,7 +224,7 @@ public abstract class QueryBase implements Serializable {
 	}
 
 	/**
-	 * µÃµ½²»°üº¬·ÖÒ³²ÎÊıÒÔÍâµÄÆäËü²ÎÊıÖµ
+	 * å¾—åˆ°ä¸åŒ…å«åˆ†é¡µå‚æ•°ä»¥å¤–çš„å…¶å®ƒå‚æ•°å€¼
 	 * @return
 	 */
 	public abstract Map<String, String> getParameters();

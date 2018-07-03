@@ -34,7 +34,7 @@
 		</property>
 	</bean>
 	
-	<context:component-scan base-package="com.eyeieye.melos.demo.web.action;com.eyeieye.melody.demo" />
+	<context:component-scan base-package="com.eyeieye.melody.demo.web.action;com.eyeieye.melody.demo" />
 	
 	<!-- view -->
 	<bean id="velocityViewCache"

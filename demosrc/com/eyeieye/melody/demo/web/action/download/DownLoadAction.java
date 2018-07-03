@@ -25,7 +25,7 @@ public class DownLoadAction {
 
 	@RequestMapping(value = "/excel.htm", method = RequestMethod.GET)
 	public void excel(HttpServletResponse response) throws IOException {
-		// ×÷ÎªÒ»¸ödemo,excelÊ¹ÓÃhtmlÄÚÈİ,¶ø·ÇÕıÊ½Ê¹ÓÃÖĞpoiµÈ¹¤¾ßÉú³É
+		// ä½œä¸ºä¸€ä¸ªdemo,excelä½¿ç”¨htmlå†…å®¹,è€Œéæ­£å¼ä½¿ç”¨ä¸­poiç­‰å·¥å…·ç”Ÿæˆ
 		response.setCharacterEncoding(encoding);
 		response.setContentType(exportContentType);
 		String fileName = "demo_down_load.xls";
@@ -34,6 +34,6 @@ public class DownLoadAction {
 		response
 				.getWriter()
 				.print(
-						"<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset="+encoding+"\"></head><body><table><tr><th>Í·1</th><th>Í·2</th></tr><tr><td>ĞĞ1</td><td>ĞĞ2</td></tr></table></body></html>");
+						"<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset="+encoding+"\"></head><body><table><tr><th>æ¾¶ï¿½1</th><th>æ¾¶ï¿½2</th></tr><tr><td>ç›ï¿½1</td><td>ç›ï¿½2</td></tr></table></body></html>");
 	}
 }

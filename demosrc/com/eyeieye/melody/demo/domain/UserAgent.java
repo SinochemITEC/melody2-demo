@@ -1,10 +1,12 @@
 package com.eyeieye.melody.demo.domain;
 
+import com.eyeieye.melody.demo.util.MD5Encode;
+
 import java.io.Serializable;
 import java.util.Date;
 
 /**
- * SNA¼Ü¹¹ÖĞ,´Ë¶ÔÏó±íÊ¾ÔÚcookieÖĞ³Ö¾Ã»¯µÄ»áÔ±,´Ë¶ÔÏóÖ»°üº¬ÁË×î³£Ê¹ÓÃµÄ»áÔ±Êı¾İ,²¢ÇÒÔÚ½á¹¹ÉÏÒ»¸ö±âÆ½µÄ¼òµ¥¶ÔÏó
+ * SNAæ¶æ„ä¸­,æ­¤å¯¹è±¡è¡¨ç¤ºåœ¨cookieä¸­æŒä¹…åŒ–çš„ä¼šå‘˜,æ­¤å¯¹è±¡åªåŒ…å«äº†æœ€å¸¸ä½¿ç”¨çš„ä¼šå‘˜æ•°æ®,å¹¶ä¸”åœ¨ç»“æ„ä¸Šä¸€ä¸ªæ‰å¹³çš„ç®€å•å¯¹è±¡
  * 
  * @author fish
  * 
@@ -14,10 +16,14 @@ public class UserAgent implements Serializable {
 
 	public static final String UserAgentTag = "userAgent";
 
-	private String realName;// ĞÕÃû
+	private String uuid;
+	private String realName;// å§“å
 	private String province;// User.NativePlace.province
 	private String city;// //User.NativePlace.city
-	private Date loginTime;// µÇÂ¼Ê±¼ä
+    private NativePlace nativePlace;
+	private Integer age;
+	private Date loginTime;// ç™»å½•æ—¶é—´
+	private String lastToken;//éªŒè¯ç 
 
 	public UserAgent() {
 		super();
@@ -28,6 +34,8 @@ public class UserAgent implements Serializable {
 		this.setRealName(u.getRealName());
 		this.setProvince(u.getNativePlace().getProvince());
 		this.setCity(u.getNativePlace().getCity());
+		this.setAge(u.getAge());
+		this.setNativePlace(u.getNativePlace());
 	}
 
 	public String getRealName() {
@@ -64,16 +72,52 @@ public class UserAgent implements Serializable {
 
 	private static final char Seq = '|';
 
-	/**
-	 * °Ñ×Ô¼º³Ö¾Ã»¯³Éstring´®
+	public String getLastToken() {
+		return lastToken;
+	}
+
+	public void setLastToken(String lastToken) {
+		this.lastToken = lastToken;
+	}
+
+	public Integer getAge() {
+		return age;
+	}
+
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
+    public void updateUuid() throws Exception {
+        this.uuid = MD5Encode.encode(realName+new Date().getTime());
+    }
+
+    public NativePlace getNativePlace() {
+        return nativePlace;
+    }
+
+    public void setNativePlace(NativePlace nativePlace) {
+        this.nativePlace = nativePlace;
+    }
+
+    /**
+	 * æŠŠè‡ªå·±æŒä¹…åŒ–æˆstringä¸²
 	 */
 	public String lieDown() {
-		// ×¢Òâ,´Ëdemo¼ÙÉèÓÃ»§Ãû,µØÇøµÄ×Ö·û´®ÖĞ²»»á³öÏÖ | Õâ¸ö×Ö·û,ËùÓĞ¼òµ¥µÄÊ¹ÓÃ×÷Îª·Ö¸ô·û
+		// æ³¨æ„,æ­¤demoå‡è®¾ç”¨æˆ·å,åœ°åŒºçš„å­—ç¬¦ä¸²ä¸­ä¸ä¼šå‡ºç° | è¿™ä¸ªå­—ç¬¦,æ‰€æœ‰ç®€å•çš„ä½¿ç”¨ä½œä¸ºåˆ†éš”ç¬¦
 		StringBuilder sb = new StringBuilder();
 		sb.append(this.realName).append(Seq);
 		sb.append(this.province).append(Seq);
 		sb.append(this.city).append(Seq);
-		sb.append(Long.toString(this.loginTime.getTime(), 32));// 32½øÖÆ±íÊ¾long,³¤¶È±È½Ï¶Ì
+		sb.append(Long.toString(this.loginTime.getTime(), 32));// 32è¿›åˆ¶è¡¨ç¤ºlong,é•¿åº¦æ¯”è¾ƒçŸ­
 		return sb.toString();
 	}
 }

@@ -1,30 +1,40 @@
 package com.eyeieye.melody.demo.service;
 
+
 import com.eyeieye.melody.demo.domain.User;
+import com.eyeieye.melody.demo.domain.UserAgent;
 
 /**
- * ÓÃ»§Service½Ó¿Ú
- * 
+ * ç”¨æˆ·Serviceæ¥å£
+ *
  * @author zhengdd
  * @version $Id: UserService.java,v 1.1 2011/06/20 07:43:14 fish Exp $
  */
 public interface UserService {
 
 	/**
-	 * ×¢²áÓÃ»§²¢»ñÈ¡×¢²áºóµÄĞÅÏ¢
-	 * 
+	 * æ³¨å†Œç”¨æˆ·å¹¶è·å–æ³¨å†Œåçš„ä¿¡æ¯
+	 *
 	 * @param user
 	 * @return User
 	 */
 	public User register(User user);
 
 	/**
-	 * ¸ù¾İÓÃ»§Ãû³ÆºÍÃ÷ÎÄ¿ÚÁî»ñµÃÓÃ»§
-	 * 
+	 * æ ¹æ®ç”¨æˆ·åç§°å’Œæ˜æ–‡å£ä»¤è·å¾—ç”¨æˆ·
+	 *
 	 * @param realName
 	 * @param password
 	 * @return
 	 */
 	public User getUserByNamePasswd(String realName, String password);
+
+	/**
+	 * æ ¡éªŒéªŒè¯ç 
+	 * @param user
+	 * @param token
+	 * @return
+	 */
+	public boolean arithmeticCheck(UserAgent user, String token);
 
 }

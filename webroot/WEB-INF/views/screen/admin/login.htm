@@ -10,7 +10,7 @@ span.required {
 <form id="loginForm" action="${appServer}/admin/login.htm" method="post">
     <table>
         <tr>
-            <th><span class="required">*</span>µÇÂ¼Ãû£º</th>
+            <th><span class="required">*</span>ç™»å½•åï¼š</th>
             <td>
                 #springBind("admin.loginId")
                 <input type="text" id="loginId" name="${status.expression}" value="$!{status.value}" />
@@ -18,7 +18,7 @@ span.required {
             </td>
 		</tr>
 		<tr>
-            <th><span class="required">*</span>¿ÚÁî£º</th>
+            <th><span class="required">*</span>å£ä»¤ï¼š</th>
             <td>
                 #springBind("admin.password")
                 <input type="text" id="password" name="${status.expression}" value="" />
@@ -27,7 +27,7 @@ span.required {
 		</tr>
 		<tr>	
             <th>
-                <input type="submit" value="µÇÂ¼" />
+                <input type="submit" value="ç™»å½•" />
             </th>
         </tr>
     </table>

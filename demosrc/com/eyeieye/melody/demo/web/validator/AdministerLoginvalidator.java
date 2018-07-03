@@ -17,10 +17,10 @@ public class AdministerLoginvalidator implements Validator {
 	public void validate(Object obj, Errors err) {
 		Administer admin = (Administer) obj;
 		if (StringUtils.isBlank(admin.getLoginId())) {
-			err.rejectValue("loginId", null, null, "ÇëÊäÈëµÇÂ¼Ãû");
+			err.rejectValue("loginId", null, null, "è¯·è¾“å…¥ç™»å½•å");
 		}
 		if (StringUtils.isBlank(admin.getPassword())) {
-			err.rejectValue("password", null, null, "ÇëÊäÈë¿ÚÁî");
+			err.rejectValue("password", null, null, "è¯·è¾“å…¥å£ä»¤");
 		}
 	}
 

@@ -1,2 +1,2 @@
-ÄãºÃ£¬ $!{name}£¡ÕâÊÇÒ»·âVelocity Layout/ScreenÄ£°å½á¹¹µÄ²âÊÔÓÊ¼ş¡£
-<br/>·ÃÎÊ±¾Ó¦ÓÃ:$!{appServer.get('/index.htm')}
+ä½ å¥½ï¼Œ $!{name}ï¼è¿™æ˜¯ä¸€å°Velocity Layout/Screenæ¨¡æ¿ç»“æ„çš„æµ‹è¯•é‚®ä»¶ã€‚
+<br/>è®¿é—®æœ¬åº”ç”¨:$!{appServer.get('/index.htm')}

@@ -2,9 +2,9 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans default-autowire="byName">
 
-	<!-- ÑéÖ¤¹²Í¨ÅäÖÃ£¬¿ÉÒÔÔÚ´ËÅäÖÃ¶ÎÄÚÅäÖÃÍ¨ÓÃÑéÖ¤¡¢functionµÈ -->
+	<!-- éªŒè¯å…±é€šé…ç½®ï¼Œå¯ä»¥åœ¨æ­¤é…ç½®æ®µå†…é…ç½®é€šç”¨éªŒè¯ã€functionç­‰ -->
 	<bean id="valangValidator" abstract="true">
-		<!-- ÑéÖ¤Í¨ÓÃfunction -->
+		<!-- éªŒè¯é€šç”¨function -->
 		<!--
 		<property name="customFunctions">
 			<map>
@@ -15,9 +15,9 @@
 	</bean>
 	
 
-	<!-- ValangÅäÖÃºÍÓï·¨Ê¾Àý -->
-	<!-- ÑéÖ¤¶Î»ù±¾Óï·¨Îª£º{ÊôÐÔÃû : ÑéÖ¤¹æÔò : Ä¬ÈÏ´íÎóÐÅÏ¢ : ´íÎóÐÅÏ¢´úÂë : ´íÎóÐÅÏ¢²ÎÊý} -->
-	<!-- ¾ßÌåÓï·¨¹æÔòÇë²Î¿¼ÈçÏÂÍøÖ·£ºhttp://www.chineselinuxuniversity.net/articles/1968.shtml
+	<!-- Valangé…ç½®å’Œè¯­æ³•ç¤ºä¾‹ -->
+	<!-- éªŒè¯æ®µåŸºæœ¬è¯­æ³•ä¸ºï¼š{å±žæ€§å : éªŒè¯è§„åˆ™ : é»˜è®¤é”™è¯¯ä¿¡æ¯ : é”™è¯¯ä¿¡æ¯ä»£ç  : é”™è¯¯ä¿¡æ¯å‚æ•°} -->
+	<!-- å…·ä½“è¯­æ³•è§„åˆ™è¯·å‚è€ƒå¦‚ä¸‹ç½‘å€ï¼šhttp://www.chineselinuxuniversity.net/articles/1968.shtml
 	                               https://springmodules.dev.java.net/docs/reference/0.8/html/validation.html#valang 
 	                               http://www.springbyexample.org/examples/spring-modules-validation-module.html      -->
 	<bean id="testValidator" class="org.springmodules.validation.valang.ValangValidator" parent="valangValidator">
@@ -35,18 +35,18 @@
 		</property>
 	</bean>
 
-	<!-- ÓÃ»§×¢²áÑéÖ¤ -->
+	<!-- ç”¨æˆ·æ³¨å†ŒéªŒè¯ -->
 	<bean id="registerValidator" class="org.springmodules.validation.valang.ValangValidator" parent="valangValidator">
 		<property name="valang">
 			<value>
 				<![CDATA[
-				{realName : ? has text : 'ÇëÌîÐ´ÐÕÃû'}
-				{realName : length(?) <= 16 : 'ÐÕÃû²»ÄÜ³¬¹ý16¸ö×Ö·û'}
-				{password : ? has text : 'ÇëÌîÐ´¿ÚÁî'}
-				{password : length(?) <= 12 and length(?) >= 6 : '¿ÚÁî³¤¶ÈÖ»ÄÜÎª6~12¸ö×Ö·û'}
-				{password : matches('^[0-9a-zA-Z]{6,12}$', ?) is true : '¿ÚÁîÖ»ÄÜÎªÊý×ÖºÍÓ¢ÎÄ'}
-				{birthday : ? is not null : 'ÇëÌîÐ´³öÉúÄêÔÂÈÕ'}
-				{birthday : (? is null or ? >= [1900-01-01]) and (? is null or ? <= [2010-01-01]) : 'ÇëÕýÈ·ÌîÐ´³öÉúÄêÔÂÈÕ'}
+				{realName : ? has text : 'è¯·å¡«å†™å§“å'}
+				{realName : length(?) <= 16 : 'å§“åä¸èƒ½è¶…è¿‡16ä¸ªå­—ç¬¦'}
+				{password : ? has text : 'è¯·å¡«å†™å£ä»¤'}
+				{password : length(?) <= 12 and length(?) >= 6 : 'å£ä»¤é•¿åº¦åªèƒ½ä¸º6~12ä¸ªå­—ç¬¦'}
+				{password : matches('^[0-9a-zA-Z]{6,12}$', ?) is true : 'å£ä»¤åªèƒ½ä¸ºæ•°å­—å’Œè‹±æ–‡'}
+				{birthday : ? is not null : 'è¯·å¡«å†™å‡ºç”Ÿå¹´æœˆæ—¥'}
+				{birthday : (? is null or ? >= [1900-01-01]) and (? is null or ? <= [2010-01-01]) : 'è¯·æ­£ç¡®å¡«å†™å‡ºç”Ÿå¹´æœˆæ—¥'}
 				]]>
 			</value>
 		</property>

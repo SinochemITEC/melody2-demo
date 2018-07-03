@@ -3,7 +3,7 @@ package com.eyeieye.melody.demo.domain;
 import java.io.Serializable;
 
 /**
- * ºÆπ·Domain
+ * Á±çË¥ØDomain
  * 
  * @author zhengdd
  * @version $Id: NativePlace.java,v 1.1 2011/06/20 07:43:14 fish Exp $

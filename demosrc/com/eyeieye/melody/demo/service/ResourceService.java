@@ -6,16 +6,16 @@ import com.eyeieye.melody.demo.domain.Resource;
 import com.eyeieye.melody.demo.enums.ResourceType;
 
 /**
- * 资源Service接口
- * 
+ * 璧勬簮Service鎺ュ彛
+ *
  * @author zhengdd
  * @version $Id: ResourceService.java,v 1.1 2011/06/20 07:43:14 fish Exp $
  */
 public interface ResourceService {
 
     /**
-     * 根据资源类型获取资源列表
-     * 
+     * 鏍规嵁璧勬簮绫诲瀷鑾峰彇璧勬簮鍒楄〃
+     *
      * @param province
      * @return List<Resource>
      */

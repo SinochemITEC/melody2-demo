@@ -1,7 +1,7 @@
 package com.eyeieye.melody.demo.enums;
 
 /**
- * demo系统使用到的权限枚举,实际可以使用String类型代替
+ * demo绯荤粺浣跨敤鍒扮殑鏉冮檺鏋氫妇,瀹為檯鍙互浣跨敤String绫诲瀷浠ｆ浛
  * 
  * @author fish
  * 

@@ -34,22 +34,22 @@ public class RsaAction {
 		this.rsaCrypto = rsaCrypto;
 		// this.jsPublicKey =
 		// rsaCrypto.getPublicKey().getModulus().toString(16);
-		// 16½øÖÆ¶¼ºÜ³¤,ÓÃbase64¶ÌÐ©
+		// 16è¿›åˆ¶éƒ½å¾ˆé•¿,ç”¨base64çŸ­äº›
 		this.jsPublicKey = toBase64(rsaCrypto.getPublicKey().getModulus());
 		this.jsExponent = rsaCrypto.getPublicKey().getPublicExponent()
 				.toString(16);
 	}
 
 	/**
-	 * ½âÃÜjs¼ÓÃÜºóµÄÖµ
+	 * è§£å¯†jsåŠ å¯†åŽçš„å€¼
 	 */
 	private String decodeJsValue(String jsValue) {
-		// melody ¿ÉÒÔÖ±½ÓÌá½»16½øÖÆµÄÃÜÎÄ,µ«ÊÇÌ«³¤
+		// melody å¯ä»¥ç›´æŽ¥æäº¤16è¿›åˆ¶çš„å¯†æ–‡,ä½†æ˜¯å¤ªé•¿
 		// byte[] input = Hex.decode(jsValue);
-		// ÓÃbase64Ìá½»¾Í¶Ì¶àÁË
+		// ç”¨base64æäº¤å°±çŸ­å¤šäº†
 		byte[] input = fromBase64(jsValue);
 		byte[] raw = this.rsaCrypto.dectypt(input);
-		// ±êÖ¾Î»Îª0Ö®ºóµÄÊÇÊäÈëµÄÓÐÐ§×Ö½Ú
+		// æ ‡å¿—ä½ä¸º0ä¹‹åŽçš„æ˜¯è¾“å…¥çš„æœ‰æ•ˆå­—èŠ‚
 		int i = raw.length - 1;
 		while (i > 0 && raw[i] != 0) {
 			i--;

@@ -74,36 +74,36 @@
 		            $('#joined').show();
 		            $('#phrase').focus();
 			    	console.log('Connected: ' + frame);
-			    	//¶©ÔÄÏûÏ¢
+			    	//è®¢é˜…æ¶ˆæ¯
 			    	_subscribe();
-			    	//·¢ËÍÉÏÏßÏûÏ¢
+			    	//å‘é€ä¸Šçº¿æ¶ˆæ¯
 			    	stompClient.send("/app/membership", {}, JSON.stringify({
 		            				user: _username,
 		                    		membership: 'join'
 		            			}));
-		            //ÏÔÊ¾Á¬½Ó½¨Á¢ÏûÏ¢
+		            //æ˜¾ç¤ºè¿æ¥å»ºç«‹æ¶ˆæ¯
 		             _self.receive({
 	                    user: 'system',
 	                    chat: 'Connection to Server Opened'
 		            });
 				}
 				
-				//Á¬½ÓÖĞµÄËùÓĞÒì³£
+				//è¿æ¥ä¸­çš„æ‰€æœ‰å¼‚å¸¸
 				function errorCallback(error){
 					if(error.indexOf('Lost connection to') >= 0){
-						//Á¬½Ó¶Ï¿ª
+						//è¿æ¥æ–­å¼€
 						_self._connectionClosed();
 					}
 				}
 		
 				
 		        this.leave = function() {
-		        	//·¢ËÍÏÂÏßÏûÏ¢
+		        	//å‘é€ä¸‹çº¿æ¶ˆæ¯
 		        	stompClient.send("/app/membership", {}, JSON.stringify({
 		            				user: _username,
 		                    		membership: 'leave'
 		            			}));
-		            //¶Ï¿ªÁ¬½Ó
+		            //æ–­å¼€è¿æ¥
 		        	stompClient.disconnect(_connectionClosed);
 		        };
 		
@@ -116,14 +116,14 @@
 		
 		            var colons = text.indexOf('::');
 		            if (colons > 0) {
-		            	//Ë½ÁÄ
+		            	//ç§èŠ
 		            	stompClient.send("/app/privatechat", {}, JSON.stringify({
 		            				user: _username,
 		                    		chat: text.substring(colons + 2),
 		                   			peer: text.substring(0, colons)
 		            			})); 
 		            } else {
-		            	//¹«ÁÄ
+		            	//å…¬èŠ
 		            	stompClient.send("/app/publicchat", {}, JSON.stringify({
 		            				user: _username,
 		                    		chat: text
@@ -182,15 +182,15 @@
 		        };
 		
 		        function _subscribe() {
-		        	//¶©ÔÄ¹«¿ªÏûÏ¢
+		        	//è®¢é˜…å…¬å¼€æ¶ˆæ¯
 		        	stompClient.subscribe('/topic/greetings', function (greeting) {
 			            _self.receive(JSON.parse(greeting.body));
 			        });
-			        //¶©ÔÄË½ÁÄÏûÏ¢
+			        //è®¢é˜…ç§èŠæ¶ˆæ¯
 			        stompClient.subscribe('/queue/'+_username, function (greeting) {
 			            _self.receive(JSON.parse(greeting.body));
 			        });
-			        //¶©ÔÄÁÄÌì»áÔ±
+			        //è®¢é˜…èŠå¤©ä¼šå‘˜
 		          	stompClient.subscribe('/topic/members', function (greeting) {
 			            _self.members(JSON.parse(greeting.body));
 			        });

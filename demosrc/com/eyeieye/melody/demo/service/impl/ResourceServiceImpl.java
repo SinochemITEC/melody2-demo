@@ -18,7 +18,7 @@ public class ResourceServiceImpl implements ResourceService {
 	static {
 		RESOURCES = new HashMap<String, List<Resource>>();
 		List<Resource> resources = new ArrayList<Resource>();
-		resources.add(new Resource("�㽭", "zj", "province", 1));
+		resources.add(new Resource("浙江", "zj", "province", 1));
 		RESOURCES.put("province", resources);
 	}
 

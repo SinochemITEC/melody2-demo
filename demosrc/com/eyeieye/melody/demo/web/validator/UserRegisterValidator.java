@@ -8,7 +8,7 @@ import org.springframework.validation.Validator;
 import com.eyeieye.melody.demo.domain.User;
 
 /**
- * µÇÂ½Ğ£Ñé£¬ÊµÏÖSpringµÄValidator½Ó¿Ú£¬²ÉÓÃ±àÂëµÄĞÎÊ½ÑéÖ¤¡£
+ * ç™»é™†æ ¡éªŒï¼Œå®ç°Springçš„Validatoræ¥å£ï¼Œé‡‡ç”¨ç¼–ç çš„å½¢å¼éªŒè¯ã€‚
  * 
  * @author zhengdd
  * @version $Id: UserRegisterValidator.java,v 1.3 2012/02/20 15:13:46 fish Exp $
@@ -20,9 +20,7 @@ public class UserRegisterValidator implements Validator {
     }
 
     /**
-     * ÑéÖ¤´¦Àí
-     * @param obj
-     * @param err
+     * éªŒè¯å¤„ç†
      * @see org.springframework.validation.Validator#validate(java.lang.Object, org.springframework.validation.Errors)
      */
     public void validate(Object obj, Errors err) {
@@ -31,16 +29,16 @@ public class UserRegisterValidator implements Validator {
         User user = (User) obj;
         String realName = user.getRealName();
         if (StringUtils.isBlank(realName)) {
-            // 4¸ö²ÎÊı·Ö±ğÎª£ºÑéÖ¤¶ÔÏóµÄÊôĞÔÃû¡¢´íÎóĞÅÏ¢´úÂë¡¢´íÎóĞÅÏ¢²ÎÊı¡¢Ä¬ÈÏ´íÎóĞÅÏ¢¡£
-            // ´íÎóĞÅÏ¢¿ÉÒÔÍ¨¹ıÅäÖÃMessageResource£¬Ö¸¶¨´íÎóĞÅÏ¢´úÂë£¬¶øÎŞĞèÔÚ´úÂëÀïĞ´ËÀ´íÎóĞÅÏ¢¡£
-            err.rejectValue("realName", "user.register.realName.empty", null, "ÇëÌîĞ´ĞÕÃû");
+            // 4ä¸ªå‚æ•°åˆ†åˆ«ä¸ºï¼šéªŒè¯å¯¹è±¡çš„å±æ€§åã€é”™è¯¯ä¿¡æ¯ä»£ç ã€é”™è¯¯ä¿¡æ¯å‚æ•°ã€é»˜è®¤é”™è¯¯ä¿¡æ¯ã€‚
+            // é”™è¯¯ä¿¡æ¯å¯ä»¥é€šè¿‡é…ç½®MessageResourceï¼ŒæŒ‡å®šé”™è¯¯ä¿¡æ¯ä»£ç ï¼Œè€Œæ— éœ€åœ¨ä»£ç é‡Œå†™æ­»é”™è¯¯ä¿¡æ¯ã€‚
+            err.rejectValue("realName", "user.register.realName.empty", null, "è¯·å¡«å†™å§“å");
         } else {
             if (realName.length() > 16) {
-                err.rejectValue("realName", "user.register.realName.long", new Integer[]{16}, "ĞÕÃû²»ÄÜ³¬¹ı{0}¸ö×Ö·û");
+                err.rejectValue("realName", "user.register.realName.long", new Integer[]{16}, "å§“åä¸èƒ½è¶…è¿‡{0}ä¸ªå­—ç¬¦");
             }
         }
         if(StringUtils.isBlank(user.getPassword())){
-        	 err.rejectValue("password", null, null, "ÇëÊäÈë¿ÚÁî");
+        	 err.rejectValue("password", null, null, "è¯·è¾“å…¥å£ä»¤");
         }
     }
 

@@ -8,8 +8,8 @@ import java.lang.annotation.Target;
 import com.eyeieye.melody.demo.enums.FunctionsEnum;
 
 /**
- * administerÈ¨ÏŞ¿ØÖÆ,È±Ê¡ÖµÎªµÇÂ¼ÓÃ»§
- * demo¼ÙÉèÈ¨ÏŞÍ¶Æ±¶¼Îª'»ò'Âß¼­
+ * administeræƒé™æ§åˆ¶,ç¼ºçœå€¼ä¸ºç™»å½•ç”¨æˆ·
+ * demoå‡è®¾æƒé™æŠ•ç¥¨éƒ½ä¸º'æˆ–'é€»è¾‘
  * 
  * @author fish
  * 
