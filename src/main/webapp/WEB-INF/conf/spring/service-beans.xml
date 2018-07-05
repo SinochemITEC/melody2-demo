@@ -24,6 +24,7 @@
 	</bean>
 
     <bean id="encode" class="com.eyeieye.melos.util.DefaultEncode"/>
+    
 	<bean class="com.eyeieye.melos.web.nosession.SessionCookieStoreConfig">
 		<property name="cookieName" value="us"/>
 		<property name="attributeNames">
