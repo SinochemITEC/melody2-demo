@@ -368,6 +368,21 @@
                 <artifactId>xercesMinimal</artifactId>
                 <version>1.9.6.2</version>
             </dependency>
+            <dependency>
+                <groupId>velocity-tools</groupId>
+                <artifactId>velocity-tools</artifactId>
+                <version>1.4</version>
+            </dependency>
+            <dependency>
+                <groupId>com.eyeieye</groupId>
+                <artifactId>simplecaptcha</artifactId>
+                <version>1.2.1</version>
+            </dependency>
+            <dependency>
+                <groupId>io.gatling</groupId>
+                <artifactId>jsr166e</artifactId>
+                <version>1.0</version>
+            </dependency>
         </dependencies>
     <properties>
 
