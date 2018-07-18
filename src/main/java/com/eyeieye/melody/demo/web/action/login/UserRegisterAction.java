@@ -10,7 +10,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import com.eyeieye.melody.demo.domain.User;
 import com.eyeieye.melody.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -27,7 +26,7 @@ import com.eyeieye.melody.demo.service.ResourceService;
 
 /**
  * 注册Action，该类主要用于演示一个完整的表单初始化、校验和处理过程。
- *
+ * 
  * @author zhengdd
  * @version $Id: UserRegisterAction.java,v 1.1 2011/06/20 07:43:15 fish Exp $
  */
@@ -64,8 +63,8 @@ public class UserRegisterAction {
 	/**
 	 * 初始化绑定。
 	 * <p>
-	 *
-	 * @InitBinder这个注解用于绑定各种PropertyEditor，即将表单提交过来的字符串，
+	 * 
+	 * @InitBinder这个注解用于绑定各种PropertyEditor，即将表单提交过来的字符串， 
 	 * 根据注册到WebDataBinder中的PropertyEditor转换为具体的某一类对象
 	 * 。
 	 * <p>
@@ -80,7 +79,7 @@ public class UserRegisterAction {
 	 *
 	 * 2、标记有该注解的方法入参必须要有WebDataBinder
 	 * 。</b>
-	 *
+	 * 
 	 * @param binder
 	 */
 	@InitBinder
@@ -95,12 +94,12 @@ public class UserRegisterAction {
 	/**
 	 * 初始化省份数据。
 	 * <p>
-	 *
-	 * @ModelAttribute这个注解用在方法级别上，将会被该方法所属的Controller中所有
+	 * 
+	 * @ModelAttribute这个注解用在方法级别上，将会被该方法所属的Controller中所有 
 	 *                                                   标注有@RequestMapping的方法自动调用，
 	 *                                                   并且将返回值按照@ModelAttribute中指定的
 	 *                                                   value添加到Model中。
-	 *
+	 * 
 	 * @return List<Resource>
 	 */
 	@SuppressWarnings("unused")
@@ -111,7 +110,7 @@ public class UserRegisterAction {
 
 	/**
 	 * 初始化城市数据。
-	 *
+	 * 
 	 * @return List<Resource>
 	 */
 	@SuppressWarnings("unused")
@@ -122,13 +121,13 @@ public class UserRegisterAction {
 
 	/**
 	 * 注册用户信息初始化。
-	 *
+	 * 
 	 * @param user
 	 */
 	@RequestMapping(value = "/register.htm", method = GET)
 	public void registerInit(@ModelAttribute("user") User user) {
 
-		// TODO; 加入其它自定义的初始化代码
+
 	}
 
 	// ~ 表单验证、处理
@@ -136,7 +135,7 @@ public class UserRegisterAction {
 
 	/**
 	 * 注册用户信息。
-	 *
+	 * 
 	 * @param user
 	 * @param result
 	 * @return String
@@ -144,7 +143,7 @@ public class UserRegisterAction {
 
 	@RequestMapping(value = "/register.htm", method = POST)
 	public String register(@ModelAttribute("user") User user,
-						   BindingResult result) {
+			BindingResult result) {
 
 		// 校验注册用户信息
 		registerValidator.validate(user, result);
@@ -155,7 +154,6 @@ public class UserRegisterAction {
 
 		// 注册用户
 		userService.register(user);
-		// TODO; 加入其它的业务逻辑
 
 		// 成功跳转
 		return "login/success";

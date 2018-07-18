@@ -10,7 +10,7 @@ import org.apache.commons.lang.StringUtils;
  * QueryBase 缺省为20，子类可以通过覆盖 getDefaultPageSize() 修改 CurrentPage（当前页）,缺省为1，首页，
  * 应在web层被设置 分页后，可以得到：TotalPage（总页数） FristItem(当前页开始记录位置，从1开始记数)
  * PageLastItem(当前页最后记录位置) 页面上，每页显示条数名字应为： lines ，当前页名字应为： page
- *
+ * 
  * @author fish
  */
 public abstract class QueryBase implements Serializable {

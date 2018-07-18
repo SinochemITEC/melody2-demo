@@ -29,8 +29,8 @@
 		<property name="cookieName" value="us"/>
 		<property name="attributeNames">
 			<set>
-				<value>administerAgent</value>
-				<value>userAgent</value>
+				<value>_administerAgent</value>
+				<value>user</value>
 			</set>
 		</property>
 		<property name="domain" value="${session.meta.cookie.domain}"/>

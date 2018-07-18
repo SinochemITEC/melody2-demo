@@ -34,6 +34,6 @@ public class DownLoadAction {
 		response
 				.getWriter()
 				.print(
-						"<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset="+encoding+"\"></head><body><table><tr><th>澶�1</th><th>澶�2</th></tr><tr><td>琛�1</td><td>琛�2</td></tr></table></body></html>");
+						"<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset="+encoding+"\"></head><body><table><tr><th>头1</th><th>头2</th></tr><tr><td>行1</td><td>行2</td></tr></table></body></html>");
 	}
 }

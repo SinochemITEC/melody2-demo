@@ -50,26 +50,26 @@
     </tr>
     <tr style='mso-height-source:userset;' id='r8'>
         <td>velocity.eventhandler.invalidreferences.class</td>
-        <td></td>
-        <td></td>
+        <td>String</td>
+        <td>Velocity处理无效参数的配置接口</td>
         <td></td>
     </tr>
     <tr style='mso-height-source:userset;' id='r9'>
         <td>velocity.eventhandler.referenceinsertion.class</td>
-        <td></td>
-        <td></td>
+        <td>String</td>
+        <td>velocity输出参数到页面前执行的接口，实现ReferenceInsertionEventHandler接口后配置在此处</td>
         <td></td>
     </tr>
     <tr style='mso-height-source:userset;' id='r10'>
         <td>velocity.eventhandler.nullset.class</td>
-        <td></td>
-        <td></td>
+        <td>String</td>
+        <td>Velocity处理空值的配置接口</td>
         <td></td>
     </tr>
     <tr style='mso-height-source:userset;' id='r11'>
         <td>velocity.layout.url</td>
         <td>String</td>
-        <td>velocity的布局文件位置,默认为layout/default.vm，对应views/layout</td>
+        <td>velocity的布局文件位置,默认为layout/default.vm</td>
         <td></td>
     </tr>
     <tr style='mso-height-source:userset;' id='r12'>
@@ -288,6 +288,18 @@
         <td>String</td>
         <td>默认地域,默认 zh_CN</td>
         <td></td>
+    </tr>
+    <tr style='mso-height-source:userset;' id='r52'>
+        <td>default.locales</td>
+        <td>String</td>
+        <td>默认地域,默认 zh_CN</td>
+        <td></td>
+    </tr>
+    <tr style='mso-height-source:userset;' id='r52'>
+        <td>system.negateDevMode</td>
+        <td>Boolean</td>
+        <td>是否启用开发者模式</td>
+        <td>该项一般和devMode相同，但是为了方便管理内核,如果内核某些功能需要devMode,而外部又需要调试,就把两个设置为不一样</td>
     </tr>
 
 </table>

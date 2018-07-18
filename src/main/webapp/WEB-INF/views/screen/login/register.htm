@@ -1,12 +1,13 @@
 <style type="text/css">
-    label.error {
-        color: red;
-        padding: 3px 10px;
-    }
-    span.required {
-        color: red;
-    }
+label.error {
+	color: red;
+	padding: 3px 10px;
+}
+span.required { 
+	color: red; 
+}
 </style>
+<br/><h2>注册演示页面</h2><br/>
 <form id="registerForm" action="$appServer.get('/login/register.htm')" method="post">
     <table>
         <tr>
@@ -14,60 +15,61 @@
             <td>
                 #springBind("user.realName")
                 <input type="text" id="realName" name="${status.expression}" value="$!{status.value}" />
-                <label class="error">${status.errorMessage}</label>
+				<label class="error">${status.errorMessage}</label>
             </td>
-        </tr>
-        <tr>
+		</tr>
+		<tr>
             <th><span class="required">*</span>口令：</th>
             <td>
                 #springBind("user.password")
-                <input type="text" id="password" name="${status.expression}" value="" />
-                <label class="error">${status.errorMessage}</label>
+                <input type="password" id="password" name="${status.expression}" value="" />
+				<label class="error">${status.errorMessage}</label>
             </td>
-        </tr>
-        <tr>
+		</tr>
+		<tr>
             <th><span class="required">*</span>出生年月日：</th>
             <td>
                 #springBind("user.birthday")
-                <input type="text" id="birthday" name="${status.expression}" value="$!{status.value}" />
-                <label class="error">${status.errorMessage}</label>
+                <input type="date" id="birthday" name="${status.expression}" value="$!{status.value}" />
+				<label class="error">${status.errorMessage}</label>
             </td>
-        </tr>
-        <tr>
-            <th>年龄：</th>
+		</tr>
+		<tr>
+            <span class="required">*</span><th>年龄：</th>
             <td>
                 #springBind("user.age")
                 <input type="text" id="birthday" name="${status.expression}" value="$!{status.value}" />
-                <label class="error">${status.errorMessage}</label>
+				<label class="error">${status.errorMessage}</label>
             </td>
-        </tr>
-        <tr>
+		</tr>
+		<tr>
             <th>籍贯：</th>
             <td>
                 #springBind("user.nativePlace.province")
                 <select id="province" name="${status.expression}">
                     <option value="">请选择</option>
                     #if($!{provinces} && !${provinces.empty})
-                    #foreach($e in $provinces)
-                    <option value="$!{e.value}" #if($!{status.value} == $!{e.value}) selected="selected" #end>$!{e.name}</option>
-                    #end
+                        #foreach($e in $provinces)
+                            <option value="$!{e.value}" #if($!{status.value} == $!{e.value}) selected="selected" #end>$!{e.name}</option>
+                        #end
                     #end
                 </select>
                 #springBind("user.nativePlace.city")
                 <select id="city" name="${status.expression}">
                     <option value="">请选择</option>
                     #if($!{cities} && !${cities.empty})
-                    #foreach($e in $cities)
-                    <option value="$!{e.value}" #if($!{status.value} == $!{e.value}) selected="selected" #end>$!{e.name}</option>
+                        #foreach($e in $cities)
+                            <option value="$!{e.value}" #if($!{status.value} == $!{e.value}) selected="selected" #end>$!{e.name}</option>
+                        #end
                     #end
-                    #end
-                </select>
+                </select>                		
             </td>
-        </tr>
-        <tr>
-            <th>
+		</tr>
+		<tr>
+            <td></td>
+            <td>
                 <input type="submit" value="注册" />
-            </th>
+            </td>
         </tr>
     </table>
 </form>

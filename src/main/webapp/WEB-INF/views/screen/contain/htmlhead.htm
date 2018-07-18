@@ -1,10 +1,17 @@
 <head>
     <title>框架介绍#if($title)-${title}#end</title>
+    #set($bigpipe = $imageServer.get('script/bigpipe.js'))
+    #set($jquery_min = $imageServer.get('script/jquery-1.8.3.min.js'))
+    #set($commonCss = $imageServer.get('css/common.css'))
+    #set($styleCss = $imageServer.get('fonts/wikifonts/style.css'))
+    #set($melodyCss = $imageServer.get('css/melody.css'))
+    #set($ieCss = $imageServer.get('css/ie.css'))
 
-    <script type="text/javascript" src="$appServer.get('/script/bigpipe.js')"></script>
-    <script type="text/javascript" src="$appServer.get('/script/jquery-1.8.3.min.js')"></script>
-    <link rel="stylesheet" href="$appServer.get('/css/common.css')"/>
-    <link rel="stylesheet" href="$appServer.get('/fonts/wikifonts/style.css')"/>
-    <link rel="stylesheet" href="$appServer.get('/css/melody.css')"/>
-    <link rel="stylesheet" href="$appServer.get('/css/ie.css')"/>
+
+    #js($bigpipe)
+    #js($jquery_min)
+    #css($commonCss)
+    #css($styleCss)
+    #css($melodyCss)
+    #css($ieCss)
 </head>

@@ -3,10 +3,10 @@ package com.eyeieye.melody.demo.service.impl;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.eyeieye.melody.demo.domain.User;
-import com.eyeieye.melody.demo.domain.UserAgent;
 import com.eyeieye.melody.demo.service.UserService;
+import com.eyeieye.melody.demo.web.action.login.User;
 import com.eyeieye.melos.util.StringUtil;
+import com.eyeieye.melos.util.UUIDGenerator;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,6 +16,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User register(User user) {
+		user.setUuid(UUIDGenerator.generate());
 		users.put(user.getRealName(), user);
 		return user;
 	}
@@ -27,7 +28,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean arithmeticCheck(UserAgent user, String token) {
+	public boolean arithmeticCheck(User user, String token) {
 		String sessionToken = user.getLastToken();
 		if (StringUtil.isEmpty(sessionToken)) {
 			return false;

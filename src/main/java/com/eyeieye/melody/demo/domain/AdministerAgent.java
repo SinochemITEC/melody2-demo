@@ -8,7 +8,7 @@ import java.util.Random;
 import com.eyeieye.melody.demo.enums.FunctionsEnum;
 
 /**
- * 鍚庡彴鐢ㄦ埛鐨刢ookie鎸佷箙鍖栧璞�
+ * 后台用户的cookie持久化对象
  * 
  * @author fish
  * 
@@ -28,6 +28,7 @@ public class AdministerAgent implements Serializable {
 
 	public AdministerAgent() {
 		super();
+		//functions = new BigInteger("0");
 	}
 
 	public AdministerAgent(Administer admin) {

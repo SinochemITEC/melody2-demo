@@ -27,7 +27,7 @@ public class I18nAction {
 		le.setAsText(locale);
 		Locale get = (Locale) le.getValue();
 		this.localeResolver.setLocale(request, response, get);
-		// demo绠�鍗曞鐞�,鍙鏈夊師椤甸潰灏遍噸鏂板姞杞�,涓嶅仛鍙傛暟澶勭悊,鎵�浠ost鎻愪氦鐨勯〉闈細鏈夐棶棰�
+		// demo简单处理,只要有原页面就重新加载,不做参数处理,所以post提交的页面会有问题
 		String s = request.getHeader("Referer");
 		if (StringUtil.isNotBlank(s)) {
 			response.sendRedirect(s);

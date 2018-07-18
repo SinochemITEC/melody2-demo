@@ -11,8 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.eyeieye.melody.demo.cache.CacheManager;
-import com.eyeieye.melody.demo.cache.ExtendedUserCacheEntry;
-import com.eyeieye.melody.demo.domain.*;
 import com.eyeieye.melody.demo.service.UserService;
 import com.eyeieye.melos.web.url.URLBroker;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +22,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- *
+ * 
  * @author fish
- *
+ * 
  */
 
 @Controller
@@ -40,54 +38,43 @@ public class UserLoginoutAction {
 
 	@RequestMapping(value = "/login.htm", method = GET)
 	public void loginPage(@ModelAttribute("user") User user,
-						  @ModelAttribute("answer") String answer) {
+			@ModelAttribute("answer") String answer) {
 	}
 
 	@RequestMapping(value = "/login.htm", method = POST)
 	public String login(@ModelAttribute("user") User user,
-						UserAgent userAgent,
-						String answer,
-						BindingResult result,
-						HttpSession session,
-						HttpServletRequest httpServletRequest,
+			            BindingResult result,
+                        HttpSession session,
+                        HttpServletRequest httpServletRequest,
 						ModelMap modelMap
-	) {
+			            ) {
 		loginValidator.validate(user, result);
-
-
-		//FIXME 用springbind的话answer取不到，但是在httpServletRequest中可以取到
-		if(!userService.arithmeticCheck(userAgent,answer)){
-			modelMap.put("checkCodeErr","验证码错误");
-			//return "login/login";
-		}
 
 		// 错误回显
 		if (result.hasErrors()) {
 			return "login/login";
 		}
 		// 逻辑检查
-		UserAgent u = new UserAgent(userService.getUserByNamePasswd(user.getRealName(),
-				user.getPassword()));
+		User u = userService.getUserByNamePasswd(user.getRealName(),
+				user.getPassword());
 		// 错误回显
 		if (u == null) {
 			return "login/login";
 		}
-
-
 		String ip = getIpAddr(httpServletRequest);
 		NativePlace nativePlace = new NativePlace();
 		nativePlace.setProvince("ip地址为："+ip+"，无法获取省份");
-		nativePlace.setCity("无法获取城市");
+        nativePlace.setCity("无法获取城市");
 		u.setLoginTime(new Date());
 		u.setNativePlace(nativePlace);
-		session.setAttribute(UserAgent.UserAgentTag, u);
+		session.setAttribute(User.NAME, u);
 		return "redirect:/login/user_main.htm";
 	}
 
 	@RequestMapping(value = "/logout.htm")
 	public String logout(HttpSession session) {
 		session.removeAttribute(User.NAME);
-		return "redirect:/login/login.htm";
+		return "redirect:"+appServerBroker;
 	}
 
 	/**
@@ -99,66 +86,66 @@ public class UserLoginoutAction {
 		// 显示首页需要的逻辑...
 	}
 
-	/**
-	 * @Description: 获取客户端IP地址
-	 */
-	private String getIpAddr(HttpServletRequest request) {
-		String ip = request.getHeader("x-forwarded-for");
-		if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getHeader("Proxy-Client-IP");
-		}
-		if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getHeader("WL-Proxy-Client-IP");
-		}
-		if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getRemoteAddr();
-			if(ip.equals("127.0.0.1")){
-				//根据网卡取本机配置的IP
-				InetAddress inet=null;
-				try {
-					inet = InetAddress.getLocalHost();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				ip= inet.getHostAddress();
-			}
-		}
-		// 多个代理的情况，第一个IP为客户端真实IP,多个IP按照','分割
-		if(ip != null && ip.length() > 15){
-			if(ip.indexOf(",")>0){
-				ip = ip.substring(0,ip.indexOf(","));
-			}
-		}
-		return ip;
-	}
+    /**
+     * @Description: 获取客户端IP地址
+     */
+    private String getIpAddr(HttpServletRequest request) {
+        String ip = request.getHeader("x-forwarded-for");
+        if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("Proxy-Client-IP");
+        }
+        if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("WL-Proxy-Client-IP");
+        }
+        if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getRemoteAddr();
+            if(ip.equals("127.0.0.1")){
+                //根据网卡取本机配置的IP
+                InetAddress inet=null;
+                try {
+                    inet = InetAddress.getLocalHost();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                ip= inet.getHostAddress();
+            }
+        }
+        // 多个代理的情况，第一个IP为客户端真实IP,多个IP按照','分割
+        if(ip != null && ip.length() > 15){
+            if(ip.indexOf(",")>0){
+                ip = ip.substring(0,ip.indexOf(","));
+            }
+        }
+        return ip;
+    }
 
-	@RequestMapping(value = "extended_user_login.htm",method = GET)
+    @RequestMapping(value = "extended_user_login.htm",method = GET)
 	@Extended
-	public String exLoginPage(ExtendedUser exUser, ModelMap modelMap){
-		modelMap.put("exUser",exUser);
-		return "/nosession/extended_user_login";
+	public String exLoginPage(ExtendedUser exUser,ModelMap modelMap){
+    	modelMap.put("exUser",exUser);
+    	return "/nosession/extended_user_login";
 	}
 
 	@Autowired
 	private CacheManager<ExtendedUserCacheEntry> cacheManager;
-	@Autowired
+    @Autowired
 	private URLBroker appServerBroker;
 
 	@RequestMapping(value = "extended_user_login.htm",method = POST)
 	public String exLogin(HttpSession httpSession){
 
-		UserAgent userAgent = new UserAgent();
-		userAgent.setRealName("TestUser");
-		userAgent.setAge(new Random().nextInt(20)+10);
+		User user = new User();
+		user.setRealName("TestUser");
+		user.setAge(new Random().nextInt(20)+10);
 		try {
-			userAgent.updateUuid();
+			user.updateUuid();
 		} catch (Exception e) {
 			return "/nosession/extended_user_login";
 		}
-		httpSession.setAttribute(User.NAME,userAgent);
+		httpSession.setAttribute(User.NAME,user);
 
 		ExtendedUser exUser = new ExtendedUser();
-		exUser.setUser(userAgent);
+		exUser.setUser(user);
 		exUser.addExtendAttribute("Extend message 1");
 		exUser.addExtendAttribute("Extend message 2");
 

@@ -28,7 +28,7 @@ public class Page {
 		}
 		model.put("query", query);
 	}
-
+	
 
 	@RequestMapping("/seo_page.htm")
 	public void seoPage(ModelMap model) throws Exception {
@@ -37,8 +37,8 @@ public class Page {
 
 	@RequestMapping("/{paramOne}/{paramTwo}/{page}.htm")
 	public String page(@PathVariable("paramOne") String paramOne,
-					   @PathVariable("paramTwo") String paramTwo,
-					   @PathVariable(value = "page") int page, ModelMap model)
+			@PathVariable("paramTwo") String paramTwo,
+			@PathVariable(value = "page") int page, ModelMap model)
 			throws Exception {
 		// 模拟分页的情况
 		UserQuery query = new UserQuery();

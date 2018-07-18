@@ -29,7 +29,7 @@ public class AsyncContainAction {
 		Thread.sleep(millis);
 		model.addAttribute("times", millis);
 	}
-
+	
 	@RequestMapping("/widget/slow1.htm")
 	public void slow1(HttpServletRequest request, ModelMap model)
 			throws Exception {

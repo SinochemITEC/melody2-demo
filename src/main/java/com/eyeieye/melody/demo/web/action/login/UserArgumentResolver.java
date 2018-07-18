@@ -1,6 +1,5 @@
 package com.eyeieye.melody.demo.web.action.login;
 
-import com.eyeieye.melody.demo.domain.User;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.support.WebArgumentResolver;

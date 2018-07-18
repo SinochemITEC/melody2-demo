@@ -6,9 +6,9 @@ import com.eyeieye.melos.web.locale.velocity.LocaleRender;
 
 /**
  * 演示如何在页面上自动根据当前访问折的locale输出
- *
+ * 
  * @author fish
- *
+ * 
  */
 public class CommonBean {
 	// 中文名称
@@ -19,7 +19,7 @@ public class CommonBean {
 
 	/**
 	 * 得到自动输出的包装类,demo中只区分了语言,没有区分国家
-	 *
+	 * 
 	 * @return
 	 */
 	public LocaleRender getNameLocale() {

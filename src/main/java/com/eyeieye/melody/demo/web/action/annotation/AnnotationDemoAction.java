@@ -8,13 +8,17 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import com.eyeieye.melos.web.url.URLBroker;
+import org.codehaus.jackson.JsonGenerator;
+import org.codehaus.jackson.JsonProcessingException;
+import org.codehaus.jackson.map.JsonSerializer;
+import org.codehaus.jackson.map.SerializerProvider;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
 
 /**
  * 
@@ -24,8 +28,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/annotation")
 public class AnnotationDemoAction {
-	@Autowired
-	URLBroker appServerBroker;
+    @Autowired
+    URLBroker appServerBroker;
 
 
 	/**
@@ -43,13 +47,13 @@ public class AnnotationDemoAction {
 	public String annotationString(ModelMap modelMap) {
 		//map.put("currentTime", new Date());
 		modelMap.put("currentTime",new Date());
-		return "annotation/return/forward";
+        return "annotation/return/forward";
 	}
 	@RequestMapping("/return/string_redirect.htm")
 	public String annotationStringRedirect(ModelMap map) {
 		map.put("currentTime", new Date());
 		return "redirect:"+appServerBroker.get("/annotation/return/redirect.htm");
-		/**不用完整URL同样可行**/
+        /**不用完整URL同样可行**/
 		//return "redirect:/annotation/return/redirect.htm");
 	}
 
@@ -79,21 +83,21 @@ public class AnnotationDemoAction {
 
 	@RequestMapping("/param/base.htm")
 	public void annotationBase(HttpServletRequest request,
-							   @RequestParam String name,
-							   @RequestParam(required = false, defaultValue = "1") int size,
-							   Model model) {
+			@RequestParam String name,
+			@RequestParam(required = false, defaultValue = "1") int size,
+			Model model) {
 		String ip = request.getRemoteAddr();
 		model.addAttribute("ip", ip);
 		model.addAttribute("name", name);
 		model.addAttribute("size", size);
 	}
 
-	public static class WestJsonSerializer extends org.codehaus.jackson.map.JsonSerializer<Integer> {
+	public static class WestJsonSerializer extends JsonSerializer<Integer> {
 
 		@Override
-		public void serialize(Integer west, org.codehaus.jackson.JsonGenerator jg,
-							  org.codehaus.jackson.map.SerializerProvider sp) throws IOException,
-				org.codehaus.jackson.JsonProcessingException {
+		public void serialize(Integer west, JsonGenerator jg,
+				SerializerProvider sp) throws IOException,
+				JsonProcessingException {
 			jg.writeNumber(west + 19);
 		}
 	}
@@ -120,7 +124,7 @@ public class AnnotationDemoAction {
 			this.nick = nick;
 		}
 
-		@org.codehaus.jackson.map.annotate.JsonSerialize(using = WestJsonSerializer.class)
+		@JsonSerialize(using = WestJsonSerializer.class)
 		public int getAge() {
 			return age;
 		}

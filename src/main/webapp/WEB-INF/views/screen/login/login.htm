@@ -8,6 +8,7 @@
         color: red;
     }
 </style>
+<br/><h2>登录演示页面</h2><br/>
 <form id="loginForm" action="$appServer.get('/login/login.htm')" method="post">
     <input type="hidden" name="c_time" value="1428300280355"/>
     <p>
@@ -26,15 +27,6 @@
                 #springBind("user.password")
                 <input type="text" id="password" name="${status.expression}" value=""/>
                 <label class="error">${status.errorMessage}</label>
-            </td>
-        </tr>
-        <tr>
-            <th><span class="required">*</span>提交验证：</th>
-            <td>
-                <img src="$appServer.get('/checkcode/arithmetic.htm')"/>
-
-                <input type="text" id="answer" name="answer"/>
-                <label class="error">$!{checkCodeErr}</label>
             </td>
         </tr>
         <tr>
