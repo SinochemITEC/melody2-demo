@@ -19,18 +19,16 @@
 		<property name="cacheSeconds" value="5"></property>
 	</bean>
 
-	<bean id="rsaCrypto" class="com.eyeieye.melos.util.crypto.impl.BcprovRsaCryptoImpl">
-		<property name="rsaKeyFile" value="WEB-INF/conf/rsa.key"></property>
-	</bean>
-
     <bean id="encode" class="com.eyeieye.melos.util.DefaultEncode"/>
-    
+
+
 	<bean class="com.eyeieye.melos.web.nosession.SessionCookieStoreConfig">
-		<property name="cookieName" value="us"/>
+		<property name="cookieName" value="_d_"/>
 		<property name="attributeNames">
 			<set>
 				<value>_administerAgent</value>
 				<value>user</value>
+				<value>userAgent</value>
 			</set>
 		</property>
 		<property name="domain" value="${session.meta.cookie.domain}"/>

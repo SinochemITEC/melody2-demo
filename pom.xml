@@ -163,7 +163,7 @@
             <dependency>
                 <groupId>com.eyeieye</groupId>
                 <artifactId>melody</artifactId>
-                <version>3.0.2</version>
+                <version>3.0.3</version>
             </dependency>
 
             <dependency>

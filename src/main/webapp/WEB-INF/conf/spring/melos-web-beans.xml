@@ -37,7 +37,6 @@
 	</bean>
 
 	<bean id="connectionManager" class="com.eyeieye.melos.util.httpclient.ConnectionManager">
-		<property name="encoding" value="${web.encoding}"></property>
 		<property name="maxTotal" value="${httpclient.max.total}" />
 		<property name="maxPerRoute" value="${httpclient.max.per.route}" />
 		<property name="socketTimeOut" value="${httpclient.socket.timeout}" />
@@ -61,7 +60,7 @@
 			</map>
 		</property>
 	</bean>
-	<!-- https鐨刟ppserver -->
+	<!-- https的appserver -->
 	<bean id="sslAppServerBroker" class="com.eyeieye.melos.web.url.URLBroker">
 		<property name="encoding" value="${web.encoding}"></property>
 		<property name="config">
@@ -84,7 +83,7 @@
 		</property>
 		<property name="stamp" value="${web.stamp}"></property>
 	</bean>
-	<!-- 澶氫富鏈簎rl 閰嶇疆 -->
+	<!-- 多主机url 配置 -->
 	<bean id="uploadServerBroker" class="com.eyeieye.melos.web.url.MultiHostURLBroker">
 		<property name="encoding" value="${web.encoding}"></property>
 		<property name="config">
