@@ -77,13 +77,9 @@ public class UserLoginoutAction {
 		return "redirect:"+appServerBroker;
 	}
 
-	/**
-	 * 偷懒一下,user main就写在loginoutAction
-	 */
 	@RequestMapping("/user_main.htm")
 	public void main(HttpSession session, ModelMap model) {
 		model.addAttribute("agent", session.getAttribute(User.NAME));
-		// 显示首页需要的逻辑...
 	}
 
     /**

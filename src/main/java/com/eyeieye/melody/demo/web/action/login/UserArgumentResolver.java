@@ -17,10 +17,10 @@ public class UserArgumentResolver implements WebArgumentResolver {
 	public Object resolveArgument(MethodParameter methodParameter,
 			NativeWebRequest webRequest) throws Exception {
 		if (methodParameter.getParameterType().equals(User.class)) {
-			User userAgent = (User) webRequest.getAttribute(User.NAME,
+			User user = (User) webRequest.getAttribute(User.NAME,
 					RequestAttributes.SCOPE_SESSION);
-			if (userAgent != null) {
-				return userAgent;
+			if (user != null) {
+				return user;
 			}
 		}
 		return UNRESOLVED;
