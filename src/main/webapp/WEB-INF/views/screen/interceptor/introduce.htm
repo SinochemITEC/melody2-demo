@@ -1,3 +1,4 @@
+#*
 <h2>拦截器</h2>
 <p>Melody中的拦截器提供自动配置和非自动配置两种方法，下面分别介绍：</p>
 <details close>
@@ -31,4 +32,19 @@
         <li>非自动加载的拦截器：请查看com.eyeieye.melody.demo.web.action.interceptor.NonAutomaticInterceptor类</li>
     </div>
 </details>
+*#
+<h2>拦截器</h2>
+<p>Melody2中拦截器和1中不同，就不再分方法级别和URL级别，只需要继承org.springframework.web.servlet.handler.HandlerInterceptorAdapter类，并实现com.eyeieye.melos.servlet.HandlerInterceptor接口即可。</p>
+<p>其中可以实现以下方法：</p>
+<li>boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)</li>
+<p>- HttpServletRequest request : 该请求的request对象</p>
+<p>- HttpServletResponse response : 该请求的response对象</p>
+<p>- Object handler : 处理的对象，如果类型是org.springframework.web.method.HandlerMethod则处理对象是一个方法</p>
+<p>该方法返回值可以指定方法是否执行，true为可以执行，false为不能执行。</p>
 
+<br/>
+<li>void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView)</li>
+<p>- HttpServletRequest request : 该请求的request对象</p>
+<p>- HttpServletResponse response : 该请求的response对象</p>
+<p>- Object handler : 处理的对象，如果类型是org.springframework.web.method.HandlerMethod则处理对象是一个方法</p>
+<p>- ModelAndView modelAndView : 页面渲染对象</p>

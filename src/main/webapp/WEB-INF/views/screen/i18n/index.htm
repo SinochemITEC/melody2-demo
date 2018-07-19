@@ -16,7 +16,7 @@ default.locales=zh_CN
         <a class="m-detail-link1" href="$appServer.get('/locale/change.htm?locale=zh_CN')">回中文</a>
     #end
     vm上国际化有两种方法:<br/>
-    <u>(1) vm本身国际化</u>,比如 index.vm(缺省),index_zh_CN.vm(中文简体),index_zh_TW(中文繁体)<br/>
+    <u>(1) vm本身国际化</u>,比如 index.htm(缺省),index_zh_CN.htm(中文简体),index_zh_TW(中文繁体)<br/>
     国际化的可以是screen,layout,contain,遵循以下规则如果当前访问者对应的 $view_$language_$country.$suffix 存在则使用此模板,否则使用$view.suffix
     <br/>
     需要注意的是vm的编码,如果有除中,英文外的语言化,vm尽量使用utf-8。
