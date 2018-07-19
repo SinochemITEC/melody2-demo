@@ -3,26 +3,37 @@ package com.eyeieye.melody.demo.web.action.login;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.support.WebArgumentResolver;
+import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.method.support.ModelAndViewContainer;
 
 /**
- * 
+ *
  * @author fish
- * 
+ *
  */
 @Component
-public class UserArgumentResolver implements WebArgumentResolver {
+public class UserArgumentResolver implements HandlerMethodArgumentResolver {
 
-	public Object resolveArgument(MethodParameter methodParameter,
-			NativeWebRequest webRequest) throws Exception {
-		if (methodParameter.getParameterType().equals(User.class)) {
-			User user = (User) webRequest.getAttribute(User.NAME,
-					RequestAttributes.SCOPE_SESSION);
-			if (user != null) {
-				return user;
-			}
-		}
-		return UNRESOLVED;
-	}
+
+    @Override
+    public boolean supportsParameter(MethodParameter methodParameter) {
+        if (methodParameter.getParameterType().equals(User.class)){
+            return true;
+        }
+        return false;
+
+    }
+
+    @Override
+    public Object resolveArgument(MethodParameter methodParameter, ModelAndViewContainer modelAndViewContainer, NativeWebRequest nativeWebRequest, WebDataBinderFactory webDataBinderFactory) throws Exception {
+            User user = (User) nativeWebRequest.getAttribute(User.NAME,
+                    RequestAttributes.SCOPE_SESSION);
+            if (user != null) {
+                return user;
+            }
+            return new Object();
+    }
 }
