@@ -22,8 +22,7 @@ public class MethodInterceptor extends HandlerInterceptorAdapter implements Hand
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         preAction(handler);
-        super.preHandle(request,response,handler);
-        return true;
+        return super.preHandle(request,response,handler);
     }
 
     @Override
