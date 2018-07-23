@@ -1,8 +1,8 @@
-package com.eyeieye.melody.demo.web.action.login;
+package com.eyeieye.melody.demo.web.resolver;
 
+import com.eyeieye.melody.demo.web.action.login.ExtendedUser;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.support.WebArgumentResolver;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.context.request.RequestAttributes;
@@ -21,11 +21,16 @@ public class ExtendedUserArgumentResolver implements HandlerMethodArgumentResolv
 		}
 		return false;
 
+
 	}
 
 	@Override
 	public Object resolveArgument(MethodParameter methodParameter, ModelAndViewContainer modelAndViewContainer, NativeWebRequest nativeWebRequest, WebDataBinderFactory webDataBinderFactory) throws Exception {
-		return nativeWebRequest.getAttribute(ExtendedUser.NAME,
-				RequestAttributes.SCOPE_REQUEST);
+		ExtendedUser extendedUser = (ExtendedUser) nativeWebRequest.getAttribute(ExtendedUser.NAME,
+                RequestAttributes.SCOPE_REQUEST);
+		if(extendedUser == null){
+		    extendedUser = new ExtendedUser();
+        }
+	    return extendedUser;
 	}
 }

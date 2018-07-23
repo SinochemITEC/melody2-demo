@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import com.eyeieye.melody.demo.cache.CacheManager;
 import com.eyeieye.melody.demo.service.UserService;
+import com.eyeieye.melody.demo.web.validator.UserLoginValidator;
 import com.eyeieye.melos.web.url.URLBroker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -122,8 +123,7 @@ public class UserLoginoutAction {
     	return "/nosession/extended_user_login";
 	}
 
-	@Autowired
-	private CacheManager<ExtendedUserCacheEntry> cacheManager;
+
     @Autowired
 	private URLBroker appServerBroker;
 
@@ -145,10 +145,7 @@ public class UserLoginoutAction {
 		exUser.addExtendAttribute("Extend message 1");
 		exUser.addExtendAttribute("Extend message 2");
 
-		ExtendedUserCacheEntry extendedUserCacheEntry = new ExtendedUserCacheEntry();
-		extendedUserCacheEntry.setExtendedUser(exUser);
 
-		cacheManager.add(ExtendedUserCacheEntry.class.getName(),extendedUserCacheEntry);
 
 		return "redirect:"+appServerBroker.get("/login/extended_user_login.htm");
 	}
