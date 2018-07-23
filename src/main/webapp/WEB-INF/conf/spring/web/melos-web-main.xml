@@ -115,6 +115,11 @@
 					class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
 			</list>
 		</property>
+		<property name="customArgumentResolvers">
+			<list>
+				<ref bean="userArgumentResolver"></ref>
+			</list>
+		</property>
 	</bean>
 		
 	<!-- 使用这个，interceptors的bean是自动加载，只需要申明bean,使用接口HandlerInterceptor即可 -->

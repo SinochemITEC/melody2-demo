@@ -10,6 +10,8 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
 import java.util.Map;
 
@@ -17,14 +19,19 @@ import java.util.Map;
 public class MethodInterceptor extends HandlerInterceptorAdapter implements HandlerInterceptor {
     private static final Logger logger = LoggerFactory.getLogger(MethodInterceptor.class);
 
-    public void preInvoke(Method handlerMethod, Object handler, ServletWebRequest webRequest) {
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         preAction(handler);
-
+        super.preHandle(request,response,handler);
+        return true;
     }
 
-    public void postInvoke(Method handlerMethod, Object handler, ServletWebRequest webRequest, ModelAndView mav) {
-        postAction(handler,mav);
+    @Override
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+        postAction(handler,modelAndView);
+        super.postHandle(request,response,handler,modelAndView);
     }
+
 
     public void preAction(Object handler) {
         if(handler instanceof HandlerMethod){
