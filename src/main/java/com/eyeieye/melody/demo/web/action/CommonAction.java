@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class CommonAction {
 
+    @RequestMapping(value = "new_feature/introduce",method = RequestMethod.GET)
+    public void newFeature(ModelMap modelMap){
+        modelMap.put("selected","new_feature");
+    }
     @RequestMapping(value = "config/introduce",method = RequestMethod.GET)
     public void configIntro(ModelMap modelMap){
         modelMap.put("selected","config");
