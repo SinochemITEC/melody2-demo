@@ -1,5 +1,6 @@
 package com.eyeieye.melody.demo.cache;
 
+import com.eyeieye.melos.rpc.hessian.HessianZipSerializer;
 import com.eyeieye.melos.util.ObjectFactory;
 import com.eyeieye.melos.web.nosession.SessionStore;
 import org.apache.commons.lang.SerializationUtils;
@@ -23,16 +24,20 @@ public class ExtendSessionStore implements SessionStore,InitializingBean {
     private Set<String> attributeNames = new HashSet<>();
 
 
+    //key一般为sessionId等，或者userid，用来标识一个用户
     @Override
     public void put(String key,Object obj) {
         Jedis jedis = jedisPool.getResource();
-        if(null == obj){
-            jedis.hset();
-        }
+        jedis.hset(key.getBytes(),obj.getClass().toString().getBytes(),HessianZipSerializer.encode(obj));
+        jedis.close();
+
     }
 
     @Override
     public Object get(String key) {
+        Jedis jedis = jedisPool.getResource();
+      //  jedis.hexists()
+        return null;
     }
 
     @Override

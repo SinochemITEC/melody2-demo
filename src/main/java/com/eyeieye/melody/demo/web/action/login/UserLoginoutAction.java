@@ -123,6 +123,8 @@ public class UserLoginoutAction {
     	return "/nosession/extended_user_login";
 	}
 
+	@Autowired
+    private CacheManager<ExtendedUserCacheEntry> cacheManager;
 
     @Autowired
 	private URLBroker appServerBroker;
@@ -145,6 +147,10 @@ public class UserLoginoutAction {
 		exUser.addExtendAttribute("Extend message 1");
 		exUser.addExtendAttribute("Extend message 2");
 
+		ExtendedUserCacheEntry extendedUserCacheEntry = new ExtendedUserCacheEntry();
+		extendedUserCacheEntry.setExtendedUser(exUser);
+
+        cacheManager.add(ExtendedUserCacheEntry.class.getName(),extendedUserCacheEntry);
 
 
 		return "redirect:"+appServerBroker.get("/login/extended_user_login.htm");
