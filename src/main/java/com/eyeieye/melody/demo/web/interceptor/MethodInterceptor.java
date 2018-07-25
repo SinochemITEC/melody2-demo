@@ -1,11 +1,10 @@
-package com.eyeieye.melody.demo.web.action.interceptor;
+package com.eyeieye.melody.demo.web.interceptor;
 
 import com.eyeieye.melos.servlet.HandlerInterceptor;
 import com.eyeieye.melos.util.ArrayUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -22,13 +21,12 @@ public class MethodInterceptor extends HandlerInterceptorAdapter implements Hand
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         preAction(handler);
-        return super.preHandle(request,response,handler);
+        return true;
     }
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         postAction(handler,modelAndView);
-        super.postHandle(request,response,handler,modelAndView);
     }
 
 

@@ -1,5 +1,6 @@
-package com.eyeieye.melody.demo.web.action.login;
+package com.eyeieye.melody.demo.web.validator;
 
+import com.eyeieye.melody.demo.web.action.login.User;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.util.Assert;
 import org.springframework.validation.Errors;

@@ -1,4 +1,4 @@
-package com.eyeieye.melody.demo.web.action.interceptor;
+package com.eyeieye.melody.demo.web.interceptor;
 
 import com.eyeieye.melos.servlet.HandlerInterceptor;
 import org.slf4j.Logger;

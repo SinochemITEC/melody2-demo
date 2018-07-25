@@ -1,8 +1,8 @@
-package com.eyeieye.melody.demo.web.action.login;
+package com.eyeieye.melody.demo.web.resolver;
 
+import com.eyeieye.melody.demo.web.action.login.User;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.support.WebArgumentResolver;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.context.request.RequestAttributes;
@@ -24,7 +24,6 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
             return true;
         }
         return false;
-
     }
 
     @Override
@@ -34,6 +33,6 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
             if (user != null) {
                 return user;
             }
-            return new Object();
+            return new User();
     }
 }

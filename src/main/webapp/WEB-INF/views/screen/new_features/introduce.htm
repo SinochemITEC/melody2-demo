@@ -5,7 +5,7 @@
 <p>Melody2中使用Nosession不再需要创建CookieStore类了，只需要在xml中将相关信息配置好即可。</p>
 <p><a class="m-detail-link1" href="$appServer.get('/nosession/introduce.htm')">查看详细>></a> </p>
 <h3>3、新的拦截器</h3>
-<p></p>
+<p>新版本使用了新的拦截器实现方法，需要继承HandlerInterceptorAdapter并实现HandlerInterceptor接口，该方法已经不区分url级别和方法级别，但是依然可以将处理粒度细化到方法上，具体实现实例见com.eyeieye.melody.demo.web.interceptor包中的拦截器。</p>
 <p><a class="m-detail-link1" href="$appServer.get('/interceptor/introduce.htm')">查看详细>></a> </p>
 <h3>4、新的Resolver</h3>
-<p>Melody2中的Resolver不再是使用的WebArgumentResolver接口，而是使用的Spring自己的HandlerMethodArgumentResolver接口</p>
+<p>Melody2中的Resolver不再是使用的WebArgumentResolver接口，而是使用的Spring自己的HandlerMethodArgumentResolver接口。</p>

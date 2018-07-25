@@ -6,6 +6,8 @@ import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -26,6 +28,8 @@ import com.eyeieye.melody.demo.web.validator.AdministerLoginvalidator;
 @Controller
 @RequestMapping("/access")
 public class AccessAction {
+
+    Logger logger = LoggerFactory.getLogger(AccessAction.class);
 
     /**
      * 演示如果直接在action中注入配置文件中设置的值
@@ -70,8 +74,14 @@ public class AccessAction {
 
     @RequestMapping(value = "logout.htm", method = RequestMethod.GET)
     public String logout(HttpSession session) {
-        session.removeAttribute(AdministerAgent.AdministerTag);
-        session.invalidate();
+        try {
+            session.removeAttribute(AdministerAgent.AdministerTag);
+            session.invalidate();
+        }catch (Exception e){
+            logger.error("登出错误，退会原页面",e);
+            return "redirect:/access/test_page.htm";
+
+        }
         return "redirect:/access/test_page.htm";
 
     }
@@ -84,6 +94,7 @@ public class AccessAction {
         }
         agent.setFunctions(0);
         session.setAttribute(AdministerAgent.AdministerTag, agent);
+        session.invalidate();
         return "redirect:/access/test_page.htm";
     }
 
