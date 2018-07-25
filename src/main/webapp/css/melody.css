@@ -21,7 +21,9 @@
 
 .melody-wrap{box-sizing:border-box;height:100%;width:100%;padding:16% 15% 2%;}
 .melody-list{margin:20px 0;}
+.melody-li2{padding:0 10%;}
 .melody-list li{float:left;width:15%;margin:0 5%;text-align:center;}
+.melody-li1 li{width:10%;}
 /*.melody-list:last-child{margin:0 10%;}*/
 /*.melody-list:last-child li{width:18.8%;margin:0 7.2%;}*/
 .melody-list li .melody-ico{background-color:#fff;border-radius:100%;}
