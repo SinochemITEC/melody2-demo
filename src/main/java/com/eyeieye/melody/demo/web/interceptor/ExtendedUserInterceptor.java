@@ -1,12 +1,14 @@
-package com.eyeieye.melody.demo.web.action.login;
+package com.eyeieye.melody.demo.web.interceptor;
 
 import com.eyeieye.melody.demo.cache.CacheManager;
+import com.eyeieye.melody.demo.web.action.login.Extended;
+import com.eyeieye.melody.demo.web.action.login.ExtendedUser;
+import com.eyeieye.melody.demo.web.action.login.ExtendedUserCacheEntry;
+import com.eyeieye.melody.demo.web.action.login.User;
 import com.eyeieye.melos.servlet.HandlerInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.RequestAttributes;
-import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -35,12 +37,12 @@ public class ExtendedUserInterceptor extends HandlerInterceptorAdapter implement
             }
 
             if(extended == null){
-                return false;
+                return true;
             }
 
             User user = (User)request.getSession().getAttribute(User.NAME);
 
-            if(user == null) return false;
+            if(user == null) return true;
 
             ExtendedUserCacheEntry extendedUserCacheEntry = cacheManager.getData(cacheName,user.getUuid());
 
@@ -53,10 +55,9 @@ public class ExtendedUserInterceptor extends HandlerInterceptorAdapter implement
             }
             exUser.setUser(user);
 
-            request.getSession().setAttribute(ExtendedUser.NAME, exUser);
+            request.setAttribute(ExtendedUser.NAME, exUser);
 
-            return true;
         }
-        return false;
+        return true;
     }
 }

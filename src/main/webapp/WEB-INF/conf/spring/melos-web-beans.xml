@@ -167,4 +167,5 @@
 	<bean id="aesCrypto" class="com.eyeieye.melos.util.crypto.impl.AESCryptoImpl" />
 
 	<bean id="blowfishCrypto" class="com.eyeieye.melos.util.crypto.impl.BlowfishCryptoImpl" />
+
 </beans>

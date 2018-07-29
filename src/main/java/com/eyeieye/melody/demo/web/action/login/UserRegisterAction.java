@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.eyeieye.melody.demo.service.UserService;
+import com.eyeieye.melody.demo.web.validator.UserRegisterValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;

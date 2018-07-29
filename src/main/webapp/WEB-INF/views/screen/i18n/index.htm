@@ -1,11 +1,11 @@
 <h3>1、默认语言配置</h3>
 <p>使用国际化需要配置默认语言，在项目的properties文件中添加如下配置内容：</p>
-<div class="melody-code-wrap"><pre><code>
+<div class="melody-code-wrap"><pre><code>velocity.locale.country=true
 support.locales=zh_CN,en_US
 default.locales=zh_CN
 </code></pre>
 </div>
-<p>以上配置配置了支持语言包括zh_CN和en_US，默认语言为zh_CN</p>
+<p>以上配置分别配置了 语言设置包括国家属性、支持语言包括zh_CN和en_US、默认语言为zh_CN</p>
 <br/>
 <h3>2、在页面上使用国际化</h3>
 <p>
@@ -15,6 +15,7 @@ default.locales=zh_CN
     #else
         <a class="m-detail-link1" href="$appServer.get('/locale/change.htm?locale=zh_CN')">回中文</a>
     #end
+    <br/>
     vm上国际化有两种方法:<br/>
     <u>(1) vm本身国际化</u>,比如 index.htm(缺省),index_zh_CN.htm(中文简体),index_zh_TW(中文繁体)<br/>
     国际化的可以是screen,layout,contain,遵循以下规则如果当前访问者对应的 $view_$language_$country.$suffix 存在则使用此模板,否则使用$view.suffix

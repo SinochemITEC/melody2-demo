@@ -1,15 +1,16 @@
-package com.eyeieye.melody.demo.web.action.interceptor;
+package com.eyeieye.melody.demo.web.interceptor;
 
 import com.eyeieye.melos.servlet.HandlerInterceptor;
 import com.eyeieye.melos.util.ArrayUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
 import java.util.Map;
 
@@ -17,14 +18,17 @@ import java.util.Map;
 public class MethodInterceptor extends HandlerInterceptorAdapter implements HandlerInterceptor {
     private static final Logger logger = LoggerFactory.getLogger(MethodInterceptor.class);
 
-    public void preInvoke(Method handlerMethod, Object handler, ServletWebRequest webRequest) {
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         preAction(handler);
-
+        return true;
     }
 
-    public void postInvoke(Method handlerMethod, Object handler, ServletWebRequest webRequest, ModelAndView mav) {
-        postAction(handler,mav);
+    @Override
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+        postAction(handler,modelAndView);
     }
+
 
     public void preAction(Object handler) {
         if(handler instanceof HandlerMethod){

@@ -21,7 +21,9 @@
 
 .melody-wrap{box-sizing:border-box;height:100%;width:100%;padding:16% 15% 2%;}
 .melody-list{margin:20px 0;}
+.melody-li2{padding:0 10%;}
 .melody-list li{float:left;width:15%;margin:0 5%;text-align:center;}
+.melody-li1 li{width:10%;}
 /*.melody-list:last-child{margin:0 10%;}*/
 /*.melody-list:last-child li{width:18.8%;margin:0 7.2%;}*/
 .melody-list li .melody-ico{background-color:#fff;border-radius:100%;}
@@ -62,6 +64,10 @@
 .foot,.footer{color:#fff;font-size:0.56em;text-align:center;position:absolute;bottom:0;width:100%;padding:15px 0;line-height:2;}
 .footer{color:#000;}
 
+.fixed-div {position: fixed; right: 1%; bottom: 10%; width: 40px; height: 40px; border: 1px solid #eee;background-color: white;font-size: 24px;z-index: 9999;}
+.fixed-div a{border-bottom: 1px solid #eee;text-align: center;color: #64854c; display: inline-block;}
+.fixed-div a i{vertical-align: middle;}
+.go-to-top{display: inline-block;    font: normal normal normal 14px/1 FontAwesome;    font-size: inherit;    text-rendering: auto;    -webkit-font-smoothing: antialiased;     content: "\f106";}
 
 
 

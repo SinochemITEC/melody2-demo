@@ -23,11 +23,29 @@
 
 
 	<bean class="com.eyeieye.melos.web.nosession.SessionCookieStoreConfig">
-		<property name="cookieName" value="_d_"/>
+		<property name="cookieName" value="_ad_"/>
 		<property name="attributeNames">
 			<set>
 				<value>_administerAgent</value>
+			</set>
+		</property>
+		<property name="domain" value="${session.meta.cookie.domain}"/>
+		<property name="path" value="/"/>
+	</bean>
+	<bean class="com.eyeieye.melos.web.nosession.SessionCookieStoreConfig">
+		<property name="cookieName" value="_u_"/>
+		<property name="attributeNames">
+			<set>
 				<value>user</value>
+			</set>
+		</property>
+		<property name="domain" value="${session.meta.cookie.domain}"/>
+		<property name="path" value="/"/>
+	</bean>
+	<bean class="com.eyeieye.melos.web.nosession.SessionCookieStoreConfig">
+		<property name="cookieName" value="_ua_"/>
+		<property name="attributeNames">
+			<set>
 				<value>userAgent</value>
 			</set>
 		</property>
