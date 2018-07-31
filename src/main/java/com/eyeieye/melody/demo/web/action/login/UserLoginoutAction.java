@@ -117,14 +117,11 @@ public class UserLoginoutAction {
     }
 
     @RequestMapping(value = "extended_user_login.htm",method = GET)
-	@Extended
 	public String exLoginPage(ExtendedUser exUser,ModelMap modelMap){
     	modelMap.put("exUser",exUser);
     	return "/nosession/extended_user_login";
 	}
 
-	@Autowired
-    private CacheManager<ExtendedUserCacheEntry> cacheManager;
 
     @Autowired
 	private URLBroker appServerBroker;
@@ -143,15 +140,10 @@ public class UserLoginoutAction {
 		httpSession.setAttribute(User.NAME,user);
 
 		ExtendedUser exUser = new ExtendedUser();
-		exUser.setUser(user);
 		exUser.addExtendAttribute("Extend message 1");
 		exUser.addExtendAttribute("Extend message 2");
 
-		ExtendedUserCacheEntry extendedUserCacheEntry = new ExtendedUserCacheEntry();
-		extendedUserCacheEntry.setExtendedUser(exUser);
-
-        cacheManager.add(ExtendedUserCacheEntry.class.getName(),extendedUserCacheEntry);
-
+		httpSession.setAttribute(ExtendedUser.NAME,exUser);
 
 		return "redirect:"+appServerBroker.get("/login/extended_user_login.htm");
 	}
