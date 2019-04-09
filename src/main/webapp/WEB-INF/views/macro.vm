@@ -2,18 +2,14 @@
 	#if($asyncContainContext)
 		$asyncContainContext.addCss("$path")
 	#else
-		<script type="text/javascript">
-			BigPipe.onArrive({"id":new Date().getTime(),"html":"","js":[],"css":["$path"],"jsCode":""});
-		</script>
+		<link type="text/css" rel="stylesheet" href="$path">
 	#end
 #end
 #macro(js $path)
 	#if($asyncContainContext)
 		$asyncContainContext.addJs("$path");
 	#else
-		<script type="text/javascript">
-			BigPipe.onArrive({"id":new Date().getTime(),"html":"","js":["$path"],"css":[],"jsCode":""});
-		</script>
+		<script type="text/javascript" src="$path"></script>
 	#end
 #end
 #macro ( direct $direct-output )$!direct-output#end
