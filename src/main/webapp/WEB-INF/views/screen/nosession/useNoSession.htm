@@ -2,8 +2,8 @@
     <li>1、设置session.meta.cookie.domain</li>
     <p>因为NoSession技术使用的是cookie存储session，所以需要先配置一下所用到的cookie的作用域。<br/>
         如果没有进行配置，则默认为配置文件中的app.server.host<br/>
-        例如，我需要在sinochem.com下的网站中使用nosession，那么就需要配置：</p>
-    <pre><code class="m-xmp">session.meta.cookie.domain=.sinochem.com</code></pre>
+        例如，我需要在eyeieye.com下的网站中使用nosession，那么就需要配置：</p>
+    <pre><code class="m-xmp">session.meta.cookie.domain=.eyeieye.com</code></pre>
     <li>2、编写domain类</li>
     <p>cookie中存储信息使用了java序列化，所以需要编写一个用于存放信息的实体类。<br/>
         该类需要实现Serializable接口，保证实体类可以序列化。<br/>
